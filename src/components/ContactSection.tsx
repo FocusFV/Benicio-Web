@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { motion } from 'framer-motion';
 import { MessageSquare, Mail, MapPin, Send, Check } from 'lucide-react';
 import { PLAYER_DATA } from '../data/playerData';
 
@@ -7,7 +8,9 @@ export const ContactSection = () => {
   const [formSent, setFormSent] = useState(false);
 
   const emailContact = "contacto@benicioocana.com";
-  const whatsappNumber = "+5493410000000";
+  // WhatsApp personal oficial de Benicio
+  const whatsappNumber = "5493416804168";
+  const whatsappDisplay = "+54 9 3416 80-4168";
 
   const handleCopyEmail = () => {
     navigator.clipboard.writeText(emailContact);
@@ -35,7 +38,7 @@ export const ContactSection = () => {
             Contacto & Ojeadores
           </h2>
           <p className="text-slate-300 text-sm sm:text-base mt-4 font-normal">
-            Canal directo para directores deportivos, agencias de representación, clubes y scouts interesados en seguimiento y coordinación de pruebas.
+            Canal directo para directores deportivos, agencias de representación, clubes y visores interesados en seguimiento deportivo.
           </p>
         </div>
 
@@ -45,31 +48,35 @@ export const ContactSection = () => {
           {/* Quick Actions (5 cols) */}
           <div className="lg:col-span-5 flex flex-col justify-between gap-4">
             
-            {/* WhatsApp Card */}
-            <a
-              href={`https://wa.me/${whatsappNumber.replace(/[^0-9]/g, '')}?text=Hola,%20me%20comunico%20por%20el%20perfil%20de%20Benicio%20Ocaña`}
+            {/* WhatsApp Card con número personal */}
+            <motion.a
+              whileHover={{ y: -4, scale: 1.01 }}
+              whileTap={{ scale: 0.98 }}
+              href={`https://wa.me/${whatsappNumber}?text=Hola%20Benicio,%20me%20comunico%20desde%20tu%20web`}
               target="_blank"
               rel="noopener noreferrer"
-              className="p-6 rounded-2xl bg-slate-900/80 hover:bg-slate-850 border border-blue-500/30 hover:border-blue-400 transition-all duration-300 shadow-xl group flex items-start gap-4"
+              className="p-6 rounded-2xl bg-slate-900/80 hover:bg-slate-850 border border-blue-500/40 hover:border-blue-400 transition-all duration-300 shadow-xl group flex items-start gap-4"
             >
               <div className="w-12 h-12 rounded-xl bg-blue-600 text-white flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform shadow-md shadow-blue-600/30">
                 <MessageSquare className="w-6 h-6" />
               </div>
               <div>
                 <span className="text-[11px] font-mono uppercase tracking-wider text-blue-300 font-semibold block mb-1">
-                  Contacto Inmediato
+                  WhatsApp Personal
                 </span>
                 <h4 className="text-lg font-bold text-white group-hover:text-blue-200 transition-colors">
-                  WhatsApp Directo
+                  {whatsappDisplay}
                 </h4>
                 <p className="text-xs text-slate-300 mt-1">
-                  Consultas de clubes, visores y cuerpo técnico vía mensajería rápida.
+                  Contacto directo vía mensajería rápida.
                 </p>
               </div>
-            </a>
+            </motion.a>
 
             {/* Email Card */}
-            <div
+            <motion.div
+              whileHover={{ y: -4, scale: 1.01 }}
+              whileTap={{ scale: 0.98 }}
               onClick={handleCopyEmail}
               className="p-6 rounded-2xl bg-slate-900/80 hover:bg-slate-850 border border-white/10 hover:border-blue-400/40 transition-all duration-300 shadow-xl group flex items-start gap-4 cursor-pointer"
             >
@@ -94,7 +101,7 @@ export const ContactSection = () => {
                   )}
                 </span>
               </div>
-            </div>
+            </motion.div>
 
             {/* Location Card */}
             <div className="p-6 rounded-2xl bg-slate-950 border border-blue-500/20 flex items-start gap-4">
@@ -169,7 +176,7 @@ export const ContactSection = () => {
                   </label>
                   <input
                     type="tel"
-                    placeholder="+54 9 11 ..."
+                    placeholder="+54 9 341 ..."
                     className="w-full px-3.5 py-2.5 rounded-lg bg-black/70 border border-white/10 text-white text-xs placeholder:text-slate-600 focus:outline-none focus:border-blue-400"
                   />
                 </div>
@@ -191,13 +198,15 @@ export const ContactSection = () => {
                 <span className="text-[11px] text-slate-400 font-mono">
                   Respuesta dentro de las 24 hs hábiles
                 </span>
-                <button
+                <motion.button
+                  whileHover={{ scale: 1.03 }}
+                  whileTap={{ scale: 0.97 }}
                   type="submit"
                   className="flex items-center gap-2 px-6 py-2.5 rounded-lg bg-blue-600 text-white font-bold text-xs uppercase tracking-wider hover:bg-blue-500 transition-all cursor-pointer shadow-lg shadow-blue-600/30"
                 >
                   <Send className="w-3.5 h-3.5" />
                   <span>Enviar Mensaje</span>
-                </button>
+                </motion.button>
               </div>
 
               {formSent && (
