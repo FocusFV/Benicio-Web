@@ -5,6 +5,7 @@ import { PLAYER_DATA } from '../data/playerData';
 
 import benicioAction from '../assets/benicio_action_orange.png';
 import benicioBack from '../assets/benicio_back_dorsal6.png';
+import escudoAdiur from '../assets/escudo_adiur.png';
 
 interface HeroProps {
   onOpenDossier: () => void;
@@ -139,7 +140,7 @@ export const Hero = ({ onOpenDossier }: HeroProps) => {
               {/* Top Bar with Perspective Toggle */}
               <div className="flex items-center justify-between pb-3 px-2 border-b border-white/10 mb-3">
                 <div className="flex items-center gap-2">
-                  <span className="w-2 h-2 rounded-full bg-blue-400 animate-pulse"></span>
+                  <img src={escudoAdiur} alt="ADIUR" className="w-5 h-5 object-contain filter drop-shadow" />
                   <span className="text-xs font-mono uppercase tracking-wider text-slate-200 font-semibold">
                     A.D.I.U.R. • ZAGA CENTRAL
                   </span>
@@ -206,8 +207,9 @@ export const Hero = ({ onOpenDossier }: HeroProps) => {
               {/* Bottom Caption - Sin repetir altura y peso */}
               <div className="pt-4 px-2 flex items-center justify-between text-xs text-slate-300 font-mono">
                 <span>{photoMode === 'action' ? 'Salida con pelota dominada' : 'Pase vertical con pierna zurda'}</span>
-                <span className="text-blue-300 font-bold bg-blue-950/80 px-2.5 py-0.5 rounded border border-blue-500/30">
-                  A.D.I.U.R.
+                <span className="text-blue-200 font-bold bg-blue-950/80 px-2.5 py-0.5 rounded border border-blue-500/30 flex items-center gap-1.5 shadow-sm">
+                  <img src={escudoAdiur} alt="ADIUR" className="w-3.5 h-3.5 object-contain" />
+                  <span>A.D.I.U.R.</span>
                 </span>
               </div>
 

@@ -1,5 +1,6 @@
 import { UserCheck, FileText, CheckCircle2, Shield } from 'lucide-react';
 import { PLAYER_DATA } from '../data/playerData';
+import escudoAdiur from '../assets/escudo_adiur.png';
 
 export const FullProfileDetails = () => {
   const specs = [
@@ -127,7 +128,8 @@ export const FullProfileDetails = () => {
               </div>
             </div>
 
-            <div className="mt-8 pt-5 border-t border-white/10 text-center">
+            <div className="mt-8 pt-5 border-t border-white/10 flex items-center justify-center gap-2">
+              <img src={escudoAdiur} alt="ADIUR" className="w-5 h-5 object-contain filter drop-shadow" />
               <span className="text-[11px] font-mono text-blue-300 font-semibold">
                 A.D.I.U.R. • Dorsal #6 Oficial
               </span>
