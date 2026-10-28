@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
-import { MessageSquare, Mail, MapPin, Send, Check, ArrowUpRight } from 'lucide-react';
-import { PLAYER_DATA } from '../data/playerData';
+import { MessageSquare, Mail, MapPin, Send, Check } from 'lucide-react';
 
 export const ContactSection = () => {
   const [copied, setCopied] = useState(false);
@@ -220,42 +219,26 @@ export const ContactSection = () => {
 
         </div>
 
-        {/* Footer with Creator Credit */}
-        <div className="mt-24 pt-10 border-t border-white/10 flex flex-col md:flex-row items-center justify-between gap-6 text-xs text-slate-400 font-mono">
-          
-          {/* Player details */}
-          <div className="flex flex-col sm:flex-row items-center gap-2 sm:gap-3 text-center sm:text-left">
-            <span className="text-white font-bold uppercase tracking-wider">{PLAYER_DATA.personal.fullName}</span>
-            <span className="hidden sm:inline text-slate-600">•</span>
-            <span className="text-blue-300 font-semibold">Marcador Central #6</span>
-            <span className="hidden sm:inline text-slate-600">•</span>
-            <span>Rosario, Santa Fe — {new Date().getFullYear()}</span>
-          </div>
-
-          {/* FocusFV Creator Badge */}
+        {/* Clean Centered FocusFV Footer */}
+        <div className="mt-24 pt-12 pb-6 border-t border-white/10 flex flex-col items-center justify-center text-center">
+          <span className="text-[10px] sm:text-[11px] font-mono uppercase tracking-[0.25em] text-slate-400 mb-4 block font-medium">
+            DESARROLLADO Y OPTIMIZADO POR
+          </span>
           <motion.a
-            whileHover={{ scale: 1.04, y: -2 }}
-            whileTap={{ scale: 0.97 }}
+            whileHover={{ scale: 1.06, y: -2 }}
+            whileTap={{ scale: 0.96 }}
             href="https://focusfv.vercel.app/"
             target="_blank"
             rel="noopener noreferrer"
-            className="group flex items-center gap-3 px-4 py-2 rounded-xl bg-slate-900/90 hover:bg-slate-800 border border-white/10 hover:border-blue-400/50 transition-all duration-300 shadow-lg shadow-black/50"
-            title="Sitio web del creador FocusFV"
+            className="inline-block transition-transform duration-300"
+            title="FocusFV — Desarrollado y optimizado por FocusFV"
           >
-            <span className="text-[11px] text-slate-400 group-hover:text-slate-200 transition-colors">
-              Sitio creado por
-            </span>
             <img
-              src="/focusfv.png"
+              src="/FocusFVLogo.png"
               alt="FocusFV"
-              className="h-6 w-auto object-contain filter brightness-110 group-hover:brightness-125 transition-all"
+              className="h-16 sm:h-20 w-auto object-contain filter drop-shadow-[0_4px_16px_rgba(0,0,0,0.6)] hover:brightness-110 transition-all"
             />
-            <span className="text-xs font-bold text-white tracking-wide group-hover:text-blue-300 transition-colors">
-              FocusFV
-            </span>
-            <ArrowUpRight className="w-3.5 h-3.5 text-slate-500 group-hover:text-blue-400 transition-colors" />
           </motion.a>
-
         </div>
 
       </div>
