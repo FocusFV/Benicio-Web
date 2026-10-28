@@ -32,22 +32,22 @@ export const Navbar = ({ onOpenDossier }: NavbarProps) => {
     <header
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 no-print ${
         scrolled
-          ? 'bg-[#08090c]/90 backdrop-blur-md border-b border-white/10 py-3 shadow-2xl'
+          ? 'bg-[#060911]/90 backdrop-blur-md border-b border-white/10 py-3 shadow-2xl'
           : 'bg-transparent py-5'
       }`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between">
         {/* Monogram / Brand */}
         <a href="#" className="flex items-center gap-3 group">
-          <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-zinc-800 to-zinc-950 border border-white/15 flex items-center justify-center font-bold tracking-wider text-white text-base group-hover:border-[#45f3ff]/50 group-hover:text-[#45f3ff] transition-all duration-300">
+          <div className="w-10 h-10 rounded-lg bg-blue-900/60 border border-blue-400/40 flex items-center justify-center font-bold tracking-wider text-white text-base group-hover:bg-blue-600 group-hover:border-white transition-all duration-300 shadow-md shadow-blue-900/20">
             {PLAYER_DATA.personal.initials}
           </div>
           <div className="flex flex-col">
-            <span className="text-sm font-semibold tracking-wide text-zinc-100 uppercase">
+            <span className="text-sm font-semibold tracking-wide text-white uppercase">
               {PLAYER_DATA.personal.fullName}
             </span>
-            <span className="text-xs text-zinc-400 font-mono flex items-center gap-1.5">
-              <span className="inline-block w-1.5 h-1.5 rounded-full bg-emerald-400"></span>
+            <span className="text-xs text-blue-300 font-mono flex items-center gap-1.5">
+              <span className="inline-block w-1.5 h-1.5 rounded-full bg-blue-400"></span>
               {PLAYER_DATA.personal.primaryPosition} • {PLAYER_DATA.personal.height}
             </span>
           </div>
@@ -59,7 +59,7 @@ export const Navbar = ({ onOpenDossier }: NavbarProps) => {
             <a
               key={link.href}
               href={link.href}
-              className="text-xs uppercase tracking-wider text-zinc-400 hover:text-white transition-colors duration-200"
+              className="text-xs uppercase tracking-wider text-slate-300 hover:text-white transition-colors duration-200"
             >
               {link.label}
             </a>
@@ -70,14 +70,14 @@ export const Navbar = ({ onOpenDossier }: NavbarProps) => {
         <div className="hidden lg:flex items-center gap-3">
           <button
             onClick={onOpenDossier}
-            className="flex items-center gap-2 px-3.5 py-2 rounded-md bg-white/5 hover:bg-white/10 border border-white/10 text-xs tracking-wider text-zinc-200 transition-all duration-200 hover:border-white/25 cursor-pointer"
+            className="flex items-center gap-2 px-3.5 py-2 rounded-md bg-white/5 hover:bg-white/10 border border-white/15 text-xs tracking-wider text-white transition-all duration-200 hover:border-white/40 cursor-pointer"
           >
-            <FileText className="w-3.5 h-3.5 text-[#45f3ff]" />
+            <FileText className="w-3.5 h-3.5 text-blue-400" />
             <span>Ficha de Scouting</span>
           </button>
           <a
             href="#contacto"
-            className="flex items-center gap-1.5 px-4 py-2 rounded-md bg-[#45f3ff] text-black font-semibold text-xs tracking-wide hover:bg-[#34d8e4] transition-all duration-200 shadow-lg shadow-[#45f3ff]/10"
+            className="flex items-center gap-1.5 px-4 py-2 rounded-md bg-blue-600 text-white font-semibold text-xs tracking-wide hover:bg-blue-500 transition-all duration-200 shadow-lg shadow-blue-600/30"
           >
             <span>Contacto</span>
             <ArrowUpRight className="w-3.5 h-3.5" />
@@ -87,7 +87,7 @@ export const Navbar = ({ onOpenDossier }: NavbarProps) => {
         {/* Mobile Menu Button */}
         <button
           onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-          className="md:hidden p-2 text-zinc-400 hover:text-white"
+          className="md:hidden p-2 text-slate-300 hover:text-white"
           aria-label="Abrir menú"
         >
           {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
@@ -101,14 +101,14 @@ export const Navbar = ({ onOpenDossier }: NavbarProps) => {
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: 'auto' }}
             exit={{ opacity: 0, height: 0 }}
-            className="md:hidden bg-[#0a0b10] border-b border-white/10 px-6 py-5 flex flex-col gap-4"
+            className="md:hidden bg-[#070b16] border-b border-white/10 px-6 py-5 flex flex-col gap-4"
           >
             {navLinks.map((link) => (
               <a
                 key={link.href}
                 href={link.href}
                 onClick={() => setMobileMenuOpen(false)}
-                className="text-sm uppercase tracking-wider text-zinc-300 hover:text-[#45f3ff] py-1"
+                className="text-sm uppercase tracking-wider text-slate-200 hover:text-blue-400 py-1"
               >
                 {link.label}
               </a>
@@ -119,15 +119,15 @@ export const Navbar = ({ onOpenDossier }: NavbarProps) => {
                   setMobileMenuOpen(false);
                   onOpenDossier();
                 }}
-                className="w-full flex items-center justify-center gap-2 py-2.5 rounded-md bg-white/5 border border-white/10 text-xs text-white"
+                className="w-full flex items-center justify-center gap-2 py-2.5 rounded-md bg-white/5 border border-white/15 text-xs text-white"
               >
-                <FileText className="w-3.5 h-3.5 text-[#45f3ff]" />
+                <FileText className="w-3.5 h-3.5 text-blue-400" />
                 <span>Ver Ficha de Scouting (PDF)</span>
               </button>
               <a
                 href="#contacto"
                 onClick={() => setMobileMenuOpen(false)}
-                className="w-full text-center py-2.5 rounded-md bg-[#45f3ff] text-black font-semibold text-xs"
+                className="w-full text-center py-2.5 rounded-md bg-blue-600 text-white font-semibold text-xs"
               >
                 Contacto Directo
               </a>

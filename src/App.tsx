@@ -14,7 +14,7 @@ export function App() {
   const [dossierOpen, setDossierOpen] = useState(false);
 
   return (
-    <div className="min-h-screen bg-[#08090c] text-[#e2e4ea] selection:bg-[#45f3ff] selection:text-black">
+    <div className="min-h-screen bg-[#060911] text-[#e2e8f0] selection:bg-blue-600 selection:text-white">
       {/* Navigation */}
       <Navbar onOpenDossier={() => setDossierOpen(true)} />
 

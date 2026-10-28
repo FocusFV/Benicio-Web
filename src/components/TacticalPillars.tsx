@@ -15,7 +15,7 @@ export const TacticalPillars = () => {
       points: [
         "Pase vertical rompiendo 1ra y 2da línea de presión rival.",
         "Cambios de frente de más de 40 metros con pie zurdo.",
-        "Manejo de amagues para zafar de la presión del 9 y descargar limpio.",
+        "Manejo de amagues para zafar de la presión del delantero rival y descargar limpio.",
         "Lanzamientos frontales milimétricos al espacio para extremos y delanteros."
       ]
     },
@@ -39,7 +39,7 @@ export const TacticalPillars = () => {
       points: [
         "Habilidad para defender con la línea adelantada lejos de su propio arco.",
         "Cierres en sprint cruzado a espaldas de los laterales zurdo y derecho.",
-        "Recuperación ante delanteros punzantes en duelos mano a mano.",
+        "Recuperación ante atacantes rápidos en duelos mano a mano.",
         "Promedio de 23 sprints de alta intensidad sostenidos por encuentro."
       ]
     },
@@ -58,20 +58,20 @@ export const TacticalPillars = () => {
   ];
 
   return (
-    <section id="tactica" className="py-24 bg-[#08090c] relative">
+    <section id="tactica" className="py-24 bg-[#060911] relative">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Section Header */}
         <div className="flex flex-col md:flex-row md:items-end justify-between mb-16">
           <div>
-            <span className="text-xs font-mono uppercase tracking-widest text-emerald-400 mb-2 block">
+            <span className="text-xs font-mono uppercase tracking-widest text-blue-400 mb-2 block">
               Evaluación Táctica & Perfil Deportivo
             </span>
             <h2 className="text-3xl sm:text-4xl md:text-5xl font-black uppercase text-white font-display">
               Pilares de Rendimiento en Cancha
             </h2>
           </div>
-          <p className="text-zinc-400 text-sm max-w-md mt-4 md:mt-0 font-normal">
+          <p className="text-slate-300 text-sm max-w-md mt-4 md:mt-0 font-normal">
             Análisis de fundamentos tácticos demostrados en video y situaciones de partido de alta exigencia competitiva.
           </p>
         </div>
@@ -80,13 +80,13 @@ export const TacticalPillars = () => {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
           
           {/* Official Tactical Field Graphic (Left 5 cols) */}
-          <div className="lg:col-span-5 rounded-2xl bg-zinc-950/90 border border-white/10 p-6 shadow-2xl relative overflow-hidden flex flex-col justify-between">
+          <div className="lg:col-span-5 rounded-2xl bg-slate-950/90 border border-blue-500/30 p-6 shadow-2xl relative overflow-hidden flex flex-col justify-between">
             <div className="flex items-center justify-between mb-4">
-              <span className="text-xs font-mono text-zinc-400 uppercase tracking-wider flex items-center gap-2">
-                <span className="w-2 h-2 rounded-full bg-emerald-400"></span>
+              <span className="text-xs font-mono text-slate-300 uppercase tracking-wider flex items-center gap-2">
+                <span className="w-2 h-2 rounded-full bg-blue-400"></span>
                 Ubicación Táctica Oficial
               </span>
-              <span className="text-xs font-mono text-[#45f3ff] bg-[#45f3ff]/10 px-2.5 py-1 rounded">
+              <span className="text-xs font-mono text-white bg-blue-600 px-2.5 py-1 rounded font-semibold">
                 Doble Perfil en Zaga
               </span>
             </div>
@@ -98,26 +98,26 @@ export const TacticalPillars = () => {
                 alt="Esquema táctico marcador central zaga doble perfil"
                 className="w-full h-full object-contain filter contrast-125"
               />
-              <div className="absolute bottom-2 left-3 right-3 py-1 px-2.5 rounded bg-black/80 backdrop-blur-sm border border-white/10 flex items-center justify-between text-[10px] font-mono text-zinc-400">
+              <div className="absolute bottom-2 left-3 right-3 py-1 px-2.5 rounded bg-black/85 backdrop-blur-sm border border-white/10 flex items-center justify-between text-[10px] font-mono text-slate-300">
                 <span className="flex items-center gap-1.5">
                   <span className="w-2 h-2 rounded-full bg-red-500"></span>
                   Camisetas rojas: Posición en zaga central
                 </span>
-                <span className="text-[#45f3ff]">Zurdo / Diestro</span>
+                <span className="text-blue-300 font-bold">Zurdo / Diestro</span>
               </div>
             </div>
 
             {/* Technical explanation below pitch */}
-            <div className="mt-5 pt-4 border-t border-white/10 text-xs text-zinc-300 leading-relaxed space-y-2">
-              <div className="flex items-center justify-between font-mono text-[11px] text-zinc-400">
+            <div className="mt-5 pt-4 border-t border-white/10 text-xs text-slate-300 leading-relaxed space-y-2">
+              <div className="flex items-center justify-between font-mono text-[11px] text-slate-400">
                 <span>Posición Primaria:</span>
                 <span className="text-white font-bold">Segundo Central (Zurdo)</span>
               </div>
-              <div className="flex items-center justify-between font-mono text-[11px] text-zinc-400">
+              <div className="flex items-center justify-between font-mono text-[11px] text-slate-400">
                 <span>Posición Secundaria:</span>
                 <span className="text-white font-bold">Primer Central (Derecho)</span>
               </div>
-              <p className="text-[11px] text-zinc-400 pt-1">
+              <p className="text-[11px] text-slate-300 pt-1">
                 La capacidad de golpear y orientar el juego con ambas piernas le permite desempeñarse con solvencia en cualquier puesto de la zaga central.
               </p>
             </div>
@@ -134,8 +134,8 @@ export const TacticalPillars = () => {
                   onClick={() => setActiveTab(idx)}
                   className={`rounded-xl p-6 border transition-all duration-300 cursor-pointer ${
                     isSelected
-                      ? 'bg-zinc-900 border-[#45f3ff]/40 shadow-xl shadow-[#45f3ff]/5'
-                      : 'bg-zinc-900/40 hover:bg-zinc-900/70 border-white/5 hover:border-white/15'
+                      ? 'bg-slate-900 border-blue-500/50 shadow-xl shadow-blue-600/10'
+                      : 'bg-slate-900/40 hover:bg-slate-900/70 border-white/10 hover:border-blue-400/30'
                   }`}
                 >
                   <div className="flex items-start justify-between gap-4">
@@ -143,8 +143,8 @@ export const TacticalPillars = () => {
                       <div
                         className={`w-10 h-10 rounded-lg flex items-center justify-center transition-colors ${
                           isSelected
-                            ? 'bg-[#45f3ff] text-black'
-                            : 'bg-zinc-800 text-zinc-400 group-hover:text-white'
+                            ? 'bg-blue-600 text-white shadow-md shadow-blue-600/30'
+                            : 'bg-slate-800 text-slate-300 group-hover:text-white'
                         }`}
                       >
                         <Icon className="w-5 h-5" />
@@ -153,19 +153,19 @@ export const TacticalPillars = () => {
                         <h3 className="text-lg font-bold text-white tracking-wide">
                           {area.title}
                         </h3>
-                        <span className="text-xs font-mono text-zinc-400 uppercase tracking-wider">
+                        <span className="text-xs font-mono text-blue-300 uppercase tracking-wider">
                           {area.role}
                         </span>
                       </div>
                     </div>
                     
                     <div className="flex items-center gap-2">
-                      <span className="text-sm font-bold font-mono text-zinc-300">
+                      <span className="text-sm font-bold font-mono text-white">
                         {area.level}%
                       </span>
                       <ArrowUpRight
                         className={`w-4 h-4 transition-transform ${
-                          isSelected ? 'rotate-45 text-[#45f3ff]' : 'text-zinc-600'
+                          isSelected ? 'rotate-45 text-blue-400' : 'text-slate-500'
                         }`}
                       />
                     </div>
@@ -183,9 +183,9 @@ export const TacticalPillars = () => {
                         {area.points.map((pt, pIdx) => (
                           <li
                             key={pIdx}
-                            className="text-xs text-zinc-300 flex items-start gap-2 leading-relaxed"
+                            className="text-xs text-slate-200 flex items-start gap-2 leading-relaxed"
                           >
-                            <span className="w-1.5 h-1.5 rounded-full bg-[#45f3ff] mt-1.5 shrink-0" />
+                            <span className="w-1.5 h-1.5 rounded-full bg-blue-400 mt-1.5 shrink-0" />
                             <span>{pt}</span>
                           </li>
                         ))}

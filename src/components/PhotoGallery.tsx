@@ -26,7 +26,7 @@ export const PhotoGallery = () => {
       category: "Acción Oficial • A.D.I.U.R.",
       caption: "Salida estructurada con balón dominado y lectura de campo para romper líneas con pase filtrado.",
       image: photoAction,
-      aspectClass: "object-contain object-bottom bg-gradient-to-t from-black via-zinc-900 to-zinc-950"
+      aspectClass: "object-contain object-bottom bg-gradient-to-t from-black via-slate-950 to-blue-950/30"
     },
     {
       id: 2,
@@ -34,7 +34,7 @@ export const PhotoGallery = () => {
       category: "Perfil Técnico Zurdo",
       caption: "Impacto con pierna zurda en pase frontal teledirigido hacia la espalda de los centrales rivales.",
       image: photoBack,
-      aspectClass: "object-contain object-bottom bg-gradient-to-t from-black via-zinc-900 to-zinc-950"
+      aspectClass: "object-contain object-bottom bg-gradient-to-t from-black via-slate-950 to-blue-950/30"
     },
     {
       id: 3,
@@ -42,7 +42,7 @@ export const PhotoGallery = () => {
       category: "Ubicación en Cancha",
       caption: "Disposición en el campo de juego cubriendo ambos perfiles centrales (izquierdo y derecho).",
       image: photoPitch,
-      aspectClass: "object-contain object-center bg-zinc-950"
+      aspectClass: "object-contain object-center bg-black"
     },
     {
       id: 4,
@@ -50,18 +50,18 @@ export const PhotoGallery = () => {
       category: "Datos de Rendimiento",
       caption: "Ficha oficial de métricas: 8879 m de recorrido promedio, 33 km/h de velocidad máxima y 96.3% de titularidad.",
       image: screenshotStats,
-      aspectClass: "object-cover object-left bg-zinc-950"
+      aspectClass: "object-cover object-left bg-black"
     }
   ];
 
   return (
-    <section id="galeria" className="py-24 bg-[#090a0e] border-t border-white/5 relative">
+    <section id="galeria" className="py-24 bg-[#070b16] border-t border-white/5 relative">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Header */}
         <div className="flex flex-col md:flex-row md:items-end justify-between mb-14">
           <div>
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/5 border border-white/10 text-xs font-mono uppercase tracking-wider text-[#45f3ff] mb-3">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-950/60 border border-blue-500/30 text-xs font-mono uppercase tracking-wider text-blue-300 mb-3">
               <Camera className="w-3.5 h-3.5" />
               <span>Registro Fotográfico & Cobertura</span>
             </div>
@@ -69,7 +69,7 @@ export const PhotoGallery = () => {
               Galería & Material de Análisis
             </h2>
           </div>
-          <p className="text-zinc-400 text-sm max-w-md mt-3 md:mt-0 font-normal">
+          <p className="text-slate-300 text-sm max-w-md mt-3 md:mt-0 font-normal">
             Capturas y material gráfico extraídos directamente del video de seguimiento oficial de partidos.
           </p>
         </div>
@@ -85,7 +85,7 @@ export const PhotoGallery = () => {
               transition={{ duration: 0.5, delay: index * 0.1 }}
               whileHover={{ y: -8 }}
               onClick={() => setSelectedPhoto(item)}
-              className="group relative rounded-2xl overflow-hidden border border-white/10 bg-zinc-950 shadow-2xl cursor-pointer"
+              className="group relative rounded-2xl overflow-hidden border border-white/10 bg-slate-950 shadow-2xl cursor-pointer hover:border-blue-400/40 transition-colors"
             >
               {/* Image Frame */}
               <div className="w-full aspect-[3/4] relative overflow-hidden p-3 flex flex-col justify-between">
@@ -102,20 +102,20 @@ export const PhotoGallery = () => {
 
                 {/* Top Badge */}
                 <div className="relative z-10 flex items-center justify-between">
-                  <span className="text-[10px] font-mono px-2 py-0.5 rounded-md bg-black/80 backdrop-blur-sm border border-white/15 text-zinc-300">
+                  <span className="text-[10px] font-mono px-2 py-0.5 rounded-md bg-black/85 backdrop-blur-sm border border-white/15 text-slate-200">
                     {item.category}
                   </span>
-                  <div className="w-7 h-7 rounded-full bg-black/60 border border-white/15 flex items-center justify-center text-white/80 group-hover:text-white group-hover:scale-110 transition-all">
+                  <div className="w-7 h-7 rounded-full bg-blue-600/80 border border-white/20 flex items-center justify-center text-white group-hover:bg-blue-500 group-hover:scale-110 transition-all shadow-md">
                     <Maximize2 className="w-3.5 h-3.5" />
                   </div>
                 </div>
 
                 {/* Bottom Overlay Info */}
                 <div className="relative z-10 pt-3">
-                  <h4 className="text-sm font-bold text-white group-hover:text-[#45f3ff] transition-colors leading-snug">
+                  <h4 className="text-sm font-bold text-white group-hover:text-blue-300 transition-colors leading-snug">
                     {item.title}
                   </h4>
-                  <p className="text-[11px] text-zinc-400 line-clamp-1 mt-0.5 font-normal">
+                  <p className="text-[11px] text-slate-300 line-clamp-1 mt-0.5 font-normal">
                     {item.caption}
                   </p>
                 </div>
@@ -141,7 +141,7 @@ export const PhotoGallery = () => {
               animate={{ scale: 1, opacity: 1 }}
               exit={{ scale: 0.9, opacity: 0 }}
               onClick={(e) => e.stopPropagation()}
-              className="relative max-w-2xl w-full rounded-2xl bg-zinc-950 border border-white/15 p-6 shadow-2xl overflow-hidden"
+              className="relative max-w-2xl w-full rounded-2xl bg-slate-950 border border-blue-500/40 p-6 shadow-2xl overflow-hidden"
             >
               <button
                 onClick={() => setSelectedPhoto(null)}
@@ -159,15 +159,15 @@ export const PhotoGallery = () => {
               </div>
 
               <div className="flex items-center justify-between mb-1">
-                <span className="text-xs font-mono text-emerald-400">
+                <span className="text-xs font-mono text-blue-300">
                   {selectedPhoto.category}
                 </span>
-                <span className="text-xs font-mono text-zinc-500">
+                <span className="text-xs font-mono text-slate-400">
                   Benicio Ocaña Zahler #6
                 </span>
               </div>
               <h3 className="text-xl font-bold text-white">{selectedPhoto.title}</h3>
-              <p className="text-sm text-zinc-300 mt-2 leading-relaxed">
+              <p className="text-sm text-slate-300 mt-2 leading-relaxed">
                 {selectedPhoto.caption}
               </p>
             </motion.div>
