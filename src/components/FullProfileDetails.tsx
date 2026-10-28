@@ -1,11 +1,7 @@
-import { UserCheck, FileText, CheckCircle2, Shield, Download } from 'lucide-react';
+import { UserCheck, FileText, CheckCircle2, Shield } from 'lucide-react';
 import { PLAYER_DATA } from '../data/playerData';
 
-interface FullProfileDetailsProps {
-  onOpenDossier: () => void;
-}
-
-export const FullProfileDetails = ({ onOpenDossier }: FullProfileDetailsProps) => {
+export const FullProfileDetails = () => {
   const specs = [
     { label: 'Nombre Completo', value: PLAYER_DATA.personal.fullName },
     { label: 'Fecha de Nacimiento', value: `${PLAYER_DATA.personal.birthDate} (18 años)` },
@@ -36,14 +32,9 @@ export const FullProfileDetails = ({ onOpenDossier }: FullProfileDetailsProps) =
               Perfil Integral del Jugador
             </h2>
           </div>
-          
-          <button
-            onClick={onOpenDossier}
-            className="mt-4 md:mt-0 inline-flex items-center gap-2 px-4 py-2.5 rounded-lg bg-slate-900 hover:bg-slate-800 border border-blue-400/30 text-xs text-white tracking-wide transition-all cursor-pointer shadow-md"
-          >
-            <Download className="w-3.5 h-3.5 text-blue-400" />
-            <span>Descargar Ficha en PDF</span>
-          </button>
+          <p className="text-slate-400 text-xs font-mono mt-2 md:mt-0">
+            A.D.I.U.R. • ZAGA CENTRAL DORSAL #6
+          </p>
         </div>
 
         {/* Detailed Grid */}

@@ -1,13 +1,9 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Menu, X, FileText, ArrowUpRight } from 'lucide-react';
+import { Menu, X, ArrowUpRight } from 'lucide-react';
 import { PLAYER_DATA } from '../data/playerData';
 
-interface NavbarProps {
-  onOpenDossier: () => void;
-}
-
-export const Navbar = ({ onOpenDossier }: NavbarProps) => {
+export const Navbar = () => {
   const [scrolled, setScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
@@ -25,6 +21,7 @@ export const Navbar = ({ onOpenDossier }: NavbarProps) => {
     { label: 'Pilares Tácticos', href: '#tactica' },
     { label: 'Video Highlights', href: '#video' },
     { label: 'Trayectoria', href: '#trayectoria' },
+    { label: 'Galería', href: '#galeria' },
     { label: 'Contacto', href: '#contacto' },
   ];
 
@@ -66,15 +63,8 @@ export const Navbar = ({ onOpenDossier }: NavbarProps) => {
           ))}
         </nav>
 
-        {/* Actions */}
-        <div className="hidden lg:flex items-center gap-3">
-          <button
-            onClick={onOpenDossier}
-            className="flex items-center gap-2 px-3.5 py-2 rounded-md bg-white/5 hover:bg-white/10 border border-white/15 text-xs tracking-wider text-white transition-all duration-200 hover:border-white/40 cursor-pointer"
-          >
-            <FileText className="w-3.5 h-3.5 text-blue-400" />
-            <span>Ficha de Scouting</span>
-          </button>
+        {/* Action */}
+        <div className="hidden lg:flex items-center">
           <a
             href="#contacto"
             className="flex items-center gap-1.5 px-4 py-2 rounded-md bg-blue-600 text-white font-semibold text-xs tracking-wide hover:bg-blue-500 transition-all duration-200 shadow-lg shadow-blue-600/30"
@@ -113,21 +103,11 @@ export const Navbar = ({ onOpenDossier }: NavbarProps) => {
                 {link.label}
               </a>
             ))}
-            <div className="pt-3 border-t border-white/10 flex flex-col gap-2.5">
-              <button
-                onClick={() => {
-                  setMobileMenuOpen(false);
-                  onOpenDossier();
-                }}
-                className="w-full flex items-center justify-center gap-2 py-2.5 rounded-md bg-white/5 border border-white/15 text-xs text-white"
-              >
-                <FileText className="w-3.5 h-3.5 text-blue-400" />
-                <span>Ver Ficha de Scouting (PDF)</span>
-              </button>
+            <div className="pt-3 border-t border-white/10">
               <a
                 href="#contacto"
                 onClick={() => setMobileMenuOpen(false)}
-                className="w-full text-center py-2.5 rounded-md bg-blue-600 text-white font-semibold text-xs"
+                className="w-full block text-center py-2.5 rounded-md bg-blue-600 text-white font-semibold text-xs"
               >
                 Contacto Directo
               </a>

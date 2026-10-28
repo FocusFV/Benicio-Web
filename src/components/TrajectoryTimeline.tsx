@@ -8,8 +8,8 @@ export const TrajectoryTimeline = () => {
     <section id="trayectoria" className="py-24 bg-[#060911] relative">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
-        {/* Header */}
-        <div className="flex flex-col md:flex-row md:items-end justify-between mb-12">
+        {/* Header with official badges */}
+        <div className="flex flex-col lg:flex-row lg:items-end justify-between mb-16 gap-6">
           <div>
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-950/60 border border-blue-500/30 text-xs font-mono uppercase tracking-wider text-blue-300 mb-3">
               <Compass className="w-3.5 h-3.5" />
@@ -18,30 +18,17 @@ export const TrajectoryTimeline = () => {
             <h2 className="text-3xl sm:text-4xl md:text-5xl font-black uppercase text-white font-display">
               Trayectoria en Clubes
             </h2>
+            <p className="text-slate-300 text-sm max-w-xl mt-3 font-normal">
+              Evolución progresiva desde canteras formativas de primer nivel (Newell's), desarrollo en ADIUR, una temporada de alta exigencia en AFA con Belgrano y retorno titular.
+            </p>
           </div>
-          <p className="text-slate-300 text-sm max-w-md mt-4 md:mt-0 font-normal">
-            Evolución progresiva desde canteras formativas de primer nivel (Newell's), desarrollo en ADIUR, una temporada de alta exigencia en AFA con Belgrano y retorno titular.
-          </p>
-        </div>
 
-        {/* Real Club Badges Strip from the Video */}
-        <div className="mb-14 p-5 rounded-2xl bg-slate-950/90 border border-blue-500/30 flex flex-col md:flex-row items-center justify-between gap-6 shadow-xl">
-          <div className="flex items-center gap-3">
-            <span className="w-2.5 h-2.5 rounded-full bg-blue-400"></span>
-            <div>
-              <span className="text-xs font-mono uppercase tracking-widest text-blue-300 block">
-                Instituciones Oficiales
-              </span>
-              <span className="text-sm font-bold text-white">
-                Newell's Old Boys • A.D.I.U.R. • Belgrano de Córdoba
-              </span>
-            </div>
-          </div>
-          <div className="bg-black/60 p-2.5 rounded-xl border border-white/10 flex items-center justify-center">
+          {/* Clean club badges container */}
+          <div className="bg-black/60 p-3 rounded-xl border border-white/10 flex items-center justify-center shrink-0 shadow-lg">
             <img
               src={badgesImg}
               alt="Escudos de clubes: Newell's, ADIUR, Belgrano de Córdoba"
-              className="h-10 sm:h-12 w-auto object-contain filter brightness-105"
+              className="h-10 sm:h-11 w-auto object-contain filter brightness-105"
             />
           </div>
         </div>
@@ -65,7 +52,7 @@ export const TrajectoryTimeline = () => {
                     isEven ? 'lg:flex-row-reverse' : ''
                   }`}
                 >
-                  {/* Content Box (takes half width on desktop) */}
+                  {/* Content Box */}
                   <div className="w-full lg:w-[46%]">
                     <div className="p-7 rounded-2xl bg-slate-900/80 border border-white/10 hover:border-blue-400/40 transition-all duration-300 shadow-xl group hover:-translate-y-1">
                       

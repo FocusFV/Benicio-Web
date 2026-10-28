@@ -61,7 +61,7 @@ export const VideoSection = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Header */}
-        <div className="flex flex-col lg:flex-row lg:items-end justify-between mb-12">
+        <div className="flex flex-col lg:flex-row lg:items-end justify-between mb-10">
           <div>
             <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-blue-950/60 border border-blue-500/30 text-xs font-mono uppercase tracking-wider text-blue-300 mb-3">
               <Video className="w-3.5 h-3.5" />
@@ -142,8 +142,7 @@ export const VideoSection = () => {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
           
           {/* Main Player Display (Left 7 cols) */}
-          <div className="lg:col-span-7 flex flex-col gap-4">
-            
+          <div className="lg:col-span-7 flex flex-col gap-3">
             <div className="relative aspect-video rounded-2xl bg-black border border-blue-500/30 overflow-hidden shadow-2xl flex flex-col justify-between">
               
               {youtubeId ? (
@@ -166,7 +165,7 @@ export const VideoSection = () => {
                     <div className="flex items-center gap-2">
                       <span className="w-2.5 h-2.5 rounded-full bg-blue-400 animate-pulse"></span>
                       <span className="text-xs font-mono text-slate-200 uppercase tracking-widest">
-                        SCOUTING ANALYTICS • ACCIÓN #{currentAction.id}
+                        ACCIÓN #{currentAction.id}
                       </span>
                     </div>
                     <span className="px-2.5 py-1 rounded bg-black/70 border border-blue-400/30 text-xs font-mono text-white font-bold">
@@ -175,7 +174,7 @@ export const VideoSection = () => {
                   </div>
 
                   {/* Center Play Button & Active Action Announcement */}
-                  <div className="relative z-10 my-auto text-center flex flex-col items-center">
+                  <div className="relative z-10 my-auto text-center flex flex-col items-center px-4">
                     <button
                       onClick={() => setIsPlaying(!isPlaying)}
                       className="group relative w-16 h-16 rounded-full bg-blue-600 text-white flex items-center justify-center shadow-2xl shadow-blue-600/50 hover:bg-blue-500 hover:scale-105 transition-all duration-300 cursor-pointer mb-4"
@@ -189,7 +188,7 @@ export const VideoSection = () => {
                     <div className="inline-block px-3 py-1 rounded-md bg-black/80 border border-blue-500/40 text-xs font-mono text-blue-300 mb-1.5 font-semibold">
                       {currentAction.tag}
                     </div>
-                    <h4 className="text-xl sm:text-2xl font-black uppercase text-white font-display max-w-lg">
+                    <h4 className="text-xl sm:text-2xl font-black uppercase text-white font-display max-w-lg leading-tight">
                       {currentAction.title}
                     </h4>
                   </div>
@@ -218,26 +217,6 @@ export const VideoSection = () => {
               )}
 
             </div>
-
-            {/* Current Action Detail Card */}
-            <div className="rounded-xl bg-slate-900/80 border border-blue-500/30 p-5 shadow-lg">
-              <div className="flex items-center justify-between mb-2">
-                <span className="text-xs font-mono text-blue-300 uppercase tracking-wider flex items-center gap-2 font-semibold">
-                  <span className="w-2 h-2 rounded-full bg-blue-400"></span>
-                  Análisis Técnico de la Jugada
-                </span>
-                <span className="text-xs font-mono text-slate-400">
-                  Timecode: {currentAction.timecode}
-                </span>
-              </div>
-              <h3 className="text-lg font-bold text-white mb-2">
-                {currentAction.title}
-              </h3>
-              <p className="text-sm text-slate-300 leading-relaxed">
-                {currentAction.description}
-              </p>
-            </div>
-
           </div>
 
           {/* Action Timestamps List (Right 5 cols) */}
@@ -252,7 +231,7 @@ export const VideoSection = () => {
             </div>
 
             {/* Scrollable list of actions */}
-            <div className="flex flex-col gap-2 max-h-[560px] overflow-y-auto pr-1">
+            <div className="flex flex-col gap-2 max-h-[500px] overflow-y-auto pr-1">
               <AnimatePresence mode="popLayout">
                 {filteredActions.map((action) => {
                   const isCurrent = action.id === activeActionId;

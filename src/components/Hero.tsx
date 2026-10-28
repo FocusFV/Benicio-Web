@@ -14,8 +14,8 @@ export const Hero = ({ onOpenDossier }: HeroProps) => {
   const [photoMode, setPhotoMode] = useState<'action' | 'back'>('action');
 
   return (
-    <section className="relative min-h-[94vh] flex items-center justify-center pt-28 pb-16 overflow-hidden bg-grid-pattern">
-      {/* Dynamic ambient lights in Blue & White */}
+    <section className="relative min-h-[90vh] flex items-center justify-center pt-28 pb-16 overflow-hidden bg-grid-pattern">
+      {/* Ambient lights */}
       <div className="absolute top-1/4 left-1/3 -translate-x-1/2 w-[700px] h-[450px] bg-gradient-to-tr from-blue-600/15 via-blue-900/10 to-transparent blur-3xl pointer-events-none rounded-full" />
       <div className="absolute top-16 right-10 w-96 h-96 bg-blue-500/10 blur-[140px] pointer-events-none" />
 
@@ -110,27 +110,6 @@ export const Hero = ({ onOpenDossier }: HeroProps) => {
                 <Download className="w-4 h-4 text-blue-400" />
                 <span>Descargar Ficha PDF</span>
               </button>
-            </motion.div>
-
-            {/* Quick metrics ticker under buttons */}
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 0.8, delay: 0.55 }}
-              className="mt-10 pt-6 border-t border-white/10 w-full grid grid-cols-3 gap-4"
-            >
-              <div>
-                <span className="text-[10px] font-mono uppercase tracking-wider text-slate-400 block">Velocidad Punta</span>
-                <span className="text-2xl font-black text-white font-display">33.0 <span className="text-xs text-blue-300 font-sans">km/h</span></span>
-              </div>
-              <div>
-                <span className="text-[10px] font-mono uppercase tracking-wider text-slate-400 block">Distancia Media</span>
-                <span className="text-2xl font-black text-white font-display">8,879 <span className="text-xs text-blue-300 font-sans">m</span></span>
-              </div>
-              <div>
-                <span className="text-[10px] font-mono uppercase tracking-wider text-slate-400 block">Titularidad</span>
-                <span className="text-2xl font-black text-blue-400 font-display">96.3%</span>
-              </div>
             </motion.div>
 
           </div>

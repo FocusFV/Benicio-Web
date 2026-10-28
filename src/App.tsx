@@ -16,7 +16,7 @@ export function App() {
   return (
     <div className="min-h-screen bg-[#060911] text-[#e2e8f0] selection:bg-blue-600 selection:text-white">
       {/* Navigation */}
-      <Navbar onOpenDossier={() => setDossierOpen(true)} />
+      <Navbar />
 
       {/* Main Content Sections */}
       <main>
@@ -26,7 +26,7 @@ export function App() {
         <VideoSection />
         <TrajectoryTimeline />
         <PhotoGallery />
-        <FullProfileDetails onOpenDossier={() => setDossierOpen(true)} />
+        <FullProfileDetails />
         <ContactSection />
       </main>
 
