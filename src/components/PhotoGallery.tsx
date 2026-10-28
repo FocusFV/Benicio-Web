@@ -24,7 +24,7 @@ export const PhotoGallery = () => {
       id: 1,
       title: "Conducción y Salida desde el Fondo",
       category: "Acción Oficial • A.D.I.U.R.",
-      caption: "Salida estructurada con balón dominado y lectura de campo para romper líneas con pase filtrado.",
+      caption: "Salida estructurada con pelota dominada y lectura de campo para romper líneas con pase filtrado.",
       image: photoAction,
       aspectClass: "object-contain object-bottom bg-gradient-to-t from-black via-slate-950 to-blue-950/30"
     },

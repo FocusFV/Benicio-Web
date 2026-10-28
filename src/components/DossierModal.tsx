@@ -118,7 +118,7 @@ export const DossierModal = ({ isOpen, onClose }: DossierModalProps) => {
               <div className="p-4 rounded-xl bg-slate-50 border border-slate-200">
                 <h3 className="font-bold text-slate-900 uppercase text-xs mb-2 flex items-center gap-1.5">
                   <Compass className="w-3.5 h-3.5 text-blue-700" />
-                  <span>Aptitudes Técnicas & Salida de Balón</span>
+                  <span>Aptitudes Técnicas y Salida Limpia</span>
                 </h3>
                 <ul className="space-y-1.5 text-slate-700">
                   <li>• Cambio de frente de más de 40 metros con pie zurdo con alta precisión.</li>
@@ -136,7 +136,7 @@ export const DossierModal = ({ isOpen, onClose }: DossierModalProps) => {
                 <ul className="space-y-1.5 text-slate-700">
                   <li>• Dominio por elevación en mitad de cancha y área propia gracias a su 1.88 m.</li>
                   <li>• Cierres en velocidad (33 km/h) a espaldas de laterales desbordados.</li>
-                  <li>• Temporización en mano a mano y barridas al piso con extirpación limpia de balón.</li>
+                  <li>• Temporización en mano a mano y quites limpios al piso cortando el avance.</li>
                   <li>• 1 sola tarjeta amarilla en 1040 minutos de alta fricción competitiva.</li>
                 </ul>
               </div>

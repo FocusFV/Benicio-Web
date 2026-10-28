@@ -212,7 +212,7 @@ export const Hero = ({ onOpenDossier }: HeroProps) => {
 
               {/* Bottom Caption */}
               <div className="pt-4 px-2 flex items-center justify-between text-xs text-slate-300 font-mono">
-                <span>{photoMode === 'action' ? 'Salida con balón dominado' : 'Impacto y pase vertical con zurda'}</span>
+                <span>{photoMode === 'action' ? 'Salida con pelota dominada' : 'Pase vertical con pierna zurda'}</span>
                 <span className="text-white font-bold bg-blue-900/60 px-2 py-0.5 rounded border border-blue-400/30">1.88 m | 88 kg</span>
               </div>
 

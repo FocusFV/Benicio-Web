@@ -99,7 +99,7 @@ export const PLAYER_DATA = {
       description: "Pico de velocidad de 33 km/h que permite defender con la línea adelantada, cerrar espacios a espaldas de los laterales y ganar duelos al espacio mano a mano."
     },
     {
-      title: "Temporización & Barrida Quirúrgica",
+      title: "Temporización y Quite al Piso",
       level: 89,
       description: "Lectura defensiva para medir el avance del rival, ganar la posición con el cuerpo (88 kg) sin falta y ejecutar quites al piso limpios con gran timing."
     }
@@ -161,7 +161,7 @@ export const PLAYER_DATA = {
       seconds: 30,
       category: "distribucion",
       title: "Salida Limpia Rompiendo Líneas",
-      description: "Salida estructurada desde el fondo, traslado con balón dominado y pase raso vertical entre líneas hacia el mediocentro ofensivo.",
+      description: "Salida estructurada desde el fondo, traslado con pelota dominada y pase raso vertical entre líneas hacia el volante ofensivo.",
       tag: "Pase Filtrado"
     },
     {
@@ -215,7 +215,7 @@ export const PLAYER_DATA = {
       seconds: 101,
       category: "cobertura",
       title: "Repliegue y Punteo Oportuno",
-      description: "Retroceso rápido temporizando el avance del atacante y corte preciso punteando el balón antes de que arme el remate.",
+      description: "Retroceso rápido temporizando el avance del atacante y corte preciso punteando la pelota justo a tiempo.",
       tag: "Timing Defensivo"
     },
     {
@@ -223,8 +223,8 @@ export const PLAYER_DATA = {
       timecode: "01:48",
       seconds: 108,
       category: "distribucion",
-      title: "Construcción y Balón en Profundidad",
-      description: "Toque corto inicial, descarga hacia adelante y lanzamiento largo al espacio para romper la presión alta rival.",
+      title: "Construcción y Pelota en Profundidad",
+      description: "Toque corto inicial, descarga hacia adelante y pase largo al espacio para romper la presión alta rival.",
       tag: "Salida de Presión"
     },
     {
@@ -232,9 +232,9 @@ export const PLAYER_DATA = {
       timecode: "02:10",
       seconds: 130,
       category: "cobertura",
-      title: "Barrida Limpia en Transición",
-      description: "Cierre sobre el costado frenando el contraataque rival con una barrida limpia enviando el balón fuera de peligro.",
-      tag: "Barrida al Piso"
+      title: "Quite Limpio al Piso en Transición",
+      description: "Cierre sobre el costado frenando la contra rival con un quite limpio al piso enviando la pelota al lateral.",
+      tag: "Quite al Piso"
     },
     {
       id: 11,
@@ -242,7 +242,7 @@ export const PLAYER_DATA = {
       seconds: 140,
       category: "cobertura",
       title: "Temporización y Despeje al Piso",
-      description: "Sostiene el mano a mano contra el atacante sin regalar espacio y barre al suelo extirpando el balón limpiamente.",
+      description: "Sostiene el mano a mano contra el atacante sin regalar espacio, se tira al piso a cortar y saca la pelota con limpieza.",
       tag: "Duelo 1v1"
     },
     {
@@ -404,7 +404,7 @@ export const PLAYER_DATA = {
       seconds: 363,
       category: "aereo",
       title: "Salto en el Corazón del Área Chica",
-      description: "Elevación imponente en el corazón del área chica ganando a defensas y arquero en tiro de esquina.",
+      description: "Elevación imponente en el corazón del área chica ganando a la defensa y al arquero rival en un córner a favor.",
       tag: "Juego Aéreo Ofensivo"
     }
   ] as PlayAction[]

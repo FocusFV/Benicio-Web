@@ -50,7 +50,7 @@ export const TacticalPillars = () => {
       level: 89,
       points: [
         "Temporización ante el atacante sin regalar espacios ni apresurarse.",
-        "Barridas a ras de piso limpias extirpando el balón de costado.",
+        "Quites limpios al piso cortando el avance rival sobre el costado.",
         "Uso del cuerpo para ganar la cuerda lateral sin cometer infracción.",
         "Registro de disciplina ejemplar: 1 sola amarilla en 1040 minutos."
       ]
