@@ -1,6 +1,6 @@
-import { useState, useMemo, useRef } from 'react';
+import { useState, useMemo, useRef, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Play, Pause, Compass, Shield, Wind, Sparkles, Filter, ChevronRight, Video, Volume2, VolumeX, Maximize2, RotateCcw } from 'lucide-react';
+import { Play, Pause, Compass, Shield, Wind, Sparkles, Filter, ChevronRight, Video, Volume2, VolumeX, Maximize2, RotateCcw, AlertCircle } from 'lucide-react';
 import { PLAYER_DATA, type PlayAction } from '../data/playerData';
 
 type CategoryFilter = 'todos' | 'distribucion' | 'cobertura' | 'aereo' | 'anticipo';
@@ -12,8 +12,12 @@ export const VideoSection = () => {
   const [isMuted, setIsMuted] = useState<boolean>(true);
   const [currentTime, setCurrentTime] = useState<number>(12);
   const [duration, setDuration] = useState<number>(376);
+  const [hasError, setHasError] = useState<boolean>(false);
+  const [showControls, setShowControls] = useState<boolean>(true);
 
   const videoRef = useRef<HTMLVideoElement>(null);
+  const videoContainerRef = useRef<HTMLDivElement>(null);
+  const controlsTimeoutRef = useRef<number | null>(null);
 
   // Active action
   const currentAction = useMemo(() => {
@@ -54,36 +58,70 @@ export const VideoSection = () => {
     },
   ];
 
-  // Jump video to action second
-  const handleSelectAction = (action: PlayAction) => {
+  // Jump video to action second and play
+  const handleSelectAction = async (action: PlayAction) => {
     setActiveActionId(action.id);
-    if (videoRef.current) {
-      videoRef.current.currentTime = action.seconds;
-      videoRef.current.play().catch(() => {});
-      setIsPlaying(true);
+    const video = videoRef.current;
+    if (video) {
+      video.currentTime = action.seconds;
+      try {
+        await video.play();
+        setIsPlaying(true);
+      } catch {
+        // Autoplay policy fallback: mute and play
+        video.muted = true;
+        setIsMuted(true);
+        try {
+          await video.play();
+          setIsPlaying(true);
+        } catch (e) {
+          console.error("No se pudo iniciar reproducción:", e);
+        }
+      }
+    }
+
+    // On mobile devices, smoothly scroll to video player
+    if (typeof window !== 'undefined' && window.innerWidth < 1024 && videoContainerRef.current) {
+      videoContainerRef.current.scrollIntoView({ behavior: 'smooth', block: 'center' });
     }
   };
 
-  const togglePlay = () => {
-    if (!videoRef.current) return;
-    if (isPlaying) {
-      videoRef.current.pause();
+  const togglePlay = async () => {
+    const video = videoRef.current;
+    if (!video) return;
+
+    if (!video.paused) {
+      video.pause();
       setIsPlaying(false);
     } else {
-      videoRef.current.play().catch(() => {});
-      setIsPlaying(true);
+      try {
+        await video.play();
+        setIsPlaying(true);
+      } catch {
+        // Autoplay policy fallback: mute and play
+        video.muted = true;
+        setIsMuted(true);
+        try {
+          await video.play();
+          setIsPlaying(true);
+        } catch (err) {
+          console.error("Error al reproducir:", err);
+        }
+      }
     }
   };
 
   const toggleMute = () => {
-    if (!videoRef.current) return;
-    videoRef.current.muted = !isMuted;
+    const video = videoRef.current;
+    if (!video) return;
+    video.muted = !isMuted;
     setIsMuted(!isMuted);
   };
 
   const handleTimeUpdate = () => {
-    if (!videoRef.current) return;
-    const cur = videoRef.current.currentTime;
+    const video = videoRef.current;
+    if (!video) return;
+    const cur = video.currentTime;
     setCurrentTime(cur);
 
     // Sync active action card with video time
@@ -97,34 +135,88 @@ export const VideoSection = () => {
     }
   };
 
+  const handleSeek = (e: React.MouseEvent<HTMLDivElement> | React.TouchEvent<HTMLDivElement>) => {
+    const video = videoRef.current;
+    if (!video) return;
+    const rect = e.currentTarget.getBoundingClientRect();
+    const clientX = 'touches' in e ? e.touches[0].clientX : e.clientX;
+    const pos = Math.max(0, Math.min(1, (clientX - rect.left) / rect.width));
+    const targetTime = pos * duration;
+    video.currentTime = targetTime;
+    setCurrentTime(targetTime);
+  };
+
+  const handleFullscreen = () => {
+    const video = videoRef.current;
+    const container = videoContainerRef.current;
+    if (!video || !container) return;
+
+    if (document.fullscreenElement) {
+      document.exitFullscreen().catch(() => {});
+    } else {
+      if (container.requestFullscreen) {
+        container.requestFullscreen().catch(() => {});
+      } else if ((video as unknown as { webkitEnterFullscreen?: () => void }).webkitEnterFullscreen) {
+        // iOS Safari full screen fallback
+        (video as unknown as { webkitEnterFullscreen: () => void }).webkitEnterFullscreen();
+      }
+    }
+  };
+
   const formatSeconds = (sec: number) => {
     const m = Math.floor(sec / 60);
     const s = Math.floor(sec % 60);
     return `${m.toString().padStart(2, '0')}:${s.toString().padStart(2, '0')}`;
   };
 
+  // Activity timer to fade controls during playback
+  const handleUserActivity = () => {
+    setShowControls(true);
+    if (controlsTimeoutRef.current) {
+      window.clearTimeout(controlsTimeoutRef.current);
+    }
+    if (isPlaying) {
+      controlsTimeoutRef.current = window.setTimeout(() => {
+        setShowControls(false);
+      }, 3500);
+    }
+  };
+
+  useEffect(() => {
+    return () => {
+      if (controlsTimeoutRef.current) {
+        window.clearTimeout(controlsTimeoutRef.current);
+      }
+    };
+  }, []);
+
   return (
-    <section id="video" className="py-24 bg-[#070b16] border-t border-white/5 relative">
+    <section id="video" className="py-20 sm:py-28 bg-[#070b16] border-t border-white/5 relative">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
-        {/* Header */}
-        <div className="flex flex-col lg:flex-row lg:items-end justify-between mb-10">
+        {/* Section Header */}
+        <div className="flex flex-col lg:flex-row lg:items-end justify-between mb-8 sm:mb-12 gap-4">
           <div>
-            <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-blue-950/60 border border-blue-500/30 text-xs font-mono uppercase tracking-wider text-blue-300 mb-3">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-950/70 border border-blue-500/30 text-xs font-mono uppercase tracking-wider text-blue-300 mb-3">
               <Video className="w-3.5 h-3.5" />
-              <span>Desglose de Video Minuto a Minuto</span>
+              <span>Análisis de Video Minuto a Minuto</span>
             </div>
-            <h2 className="text-3xl sm:text-4xl md:text-5xl font-black uppercase text-white font-display">
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-black uppercase text-white font-display tracking-tight">
               Jugadas Destacadas en Partido
             </h2>
+            <p className="text-slate-300 text-xs sm:text-sm max-w-xl mt-2 font-normal leading-relaxed">
+              Selección de 29 acciones reales de partido organizadas cronológicamente y por categoría táctica.
+            </p>
           </div>
-          <div className="mt-3 lg:mt-0 text-xs font-mono text-slate-400">
-            benicio.mp4 • 29 Acciones Sincronizadas
+
+          <div className="flex items-center gap-2 text-xs font-mono text-blue-300 bg-blue-950/40 border border-blue-500/20 px-3 py-1.5 rounded-lg self-start lg:self-auto">
+            <span className="w-2 h-2 rounded-full bg-blue-400 animate-pulse" />
+            <span>29 Acciones Sincronizadas • HD 1080p</span>
           </div>
         </div>
 
-        {/* Categories Filter Tabs */}
-        <div className="flex items-center gap-2 overflow-x-auto pb-4 mb-8 scrollbar-none">
+        {/* Categories Filter Tabs (Smooth horizontal scroll on mobile) */}
+        <div className="flex items-center gap-2 overflow-x-auto pb-4 mb-6 sm:mb-8 scrollbar-none -mx-4 px-4 sm:mx-0 sm:px-0">
           {categories.map((cat) => {
             const Icon = cat.icon;
             const isSelected = selectedCategory === cat.id;
@@ -134,10 +226,10 @@ export const VideoSection = () => {
                 whileTap={{ scale: 0.98 }}
                 key={cat.id}
                 onClick={() => setSelectedCategory(cat.id as CategoryFilter)}
-                className={`flex items-center gap-2 px-4 py-2.5 rounded-lg text-xs font-medium tracking-wide transition-all duration-200 whitespace-nowrap cursor-pointer ${
+                className={`flex items-center gap-2 px-3.5 py-2 sm:px-4 sm:py-2.5 rounded-xl text-xs font-medium tracking-wide transition-all duration-200 whitespace-nowrap cursor-pointer shrink-0 ${
                   isSelected
-                    ? 'bg-blue-600 text-white font-bold shadow-lg shadow-blue-600/30'
-                    : 'bg-slate-900/80 hover:bg-slate-850 text-slate-300 border border-white/10 hover:border-blue-400/30'
+                    ? 'bg-blue-600 text-white font-bold shadow-lg shadow-blue-600/30 border border-blue-400/50'
+                    : 'bg-slate-900/80 hover:bg-slate-800 text-slate-300 border border-white/10 hover:border-blue-400/30'
                 }`}
               >
                 <Icon className="w-3.5 h-3.5" />
@@ -155,123 +247,171 @@ export const VideoSection = () => {
         </div>
 
         {/* Video Player + Action List Layout */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-start">
           
           {/* Main Player Display (Left 7 cols) */}
           <div className="lg:col-span-7 flex flex-col gap-3">
-            <div className="relative aspect-video rounded-2xl bg-black border border-blue-500/30 overflow-hidden shadow-2xl flex flex-col justify-between group">
+            <div
+              ref={videoContainerRef}
+              onMouseMove={handleUserActivity}
+              onTouchStart={handleUserActivity}
+              className="relative aspect-video rounded-2xl bg-black border border-blue-500/30 overflow-hidden shadow-2xl flex flex-col justify-between group select-none"
+            >
               
-              {/* HTML5 Real Video Element linked to public/benicio.mp4 */}
+              {/* HTML5 Video Element */}
               <video
                 ref={videoRef}
                 src="/benicio.mp4"
+                poster="/video_poster.jpg"
+                preload="metadata"
                 playsInline
                 muted={isMuted}
                 onTimeUpdate={handleTimeUpdate}
                 onLoadedMetadata={() => {
                   if (videoRef.current) {
                     setDuration(videoRef.current.duration || 376);
-                    videoRef.current.currentTime = 12;
+                    setHasError(false);
                   }
                 }}
                 onPlay={() => setIsPlaying(true)}
                 onPause={() => setIsPlaying(false)}
+                onEnded={() => setIsPlaying(false)}
+                onError={() => setHasError(true)}
                 className="w-full h-full object-cover cursor-pointer"
                 onClick={togglePlay}
               />
 
+              {/* Error fallback state if file cannot be loaded */}
+              {hasError && (
+                <div className="absolute inset-0 bg-slate-950/95 flex flex-col items-center justify-center p-6 text-center z-30">
+                  <AlertCircle className="w-12 h-12 text-blue-400 mb-3" />
+                  <h4 className="text-white font-bold text-base mb-1">Cargando video de jugadas...</h4>
+                  <p className="text-slate-400 text-xs max-w-sm mb-4">
+                    Optimizando la conexión con el servidor. Si tarda en reproducir, presione reintentar.
+                  </p>
+                  <button
+                    onClick={() => {
+                      if (videoRef.current) {
+                        videoRef.current.load();
+                        setHasError(false);
+                      }
+                    }}
+                    className="px-4 py-2 rounded-lg bg-blue-600 hover:bg-blue-500 text-white font-bold text-xs cursor-pointer shadow-lg"
+                  >
+                    Reintentar Carga
+                  </button>
+                </div>
+              )}
+
               {/* Top Bar inside Video Player */}
-              <div className="absolute top-0 left-0 right-0 p-4 bg-gradient-to-b from-black/80 to-transparent flex items-center justify-between pointer-events-none z-10">
-                <div className="flex items-center gap-2">
-                  <span className={`w-2.5 h-2.5 rounded-full ${isPlaying ? 'bg-emerald-400 animate-pulse' : 'bg-blue-400'}`}></span>
-                  <span className="text-xs font-mono text-white uppercase tracking-widest font-semibold drop-shadow">
-                    ACCIÓN #{currentAction.id}: {currentAction.title}
+              <div
+                className={`absolute top-0 left-0 right-0 p-3 sm:p-4 bg-gradient-to-b from-black/85 via-black/40 to-transparent flex items-center justify-between pointer-events-none z-10 transition-opacity duration-300 ${
+                  showControls || !isPlaying ? 'opacity-100' : 'opacity-0'
+                }`}
+              >
+                <div className="flex items-center gap-2 max-w-[70%]">
+                  <span className={`w-2.5 h-2.5 rounded-full shrink-0 ${isPlaying ? 'bg-emerald-400 animate-pulse' : 'bg-blue-400'}`} />
+                  <span className="text-[11px] sm:text-xs font-mono text-white uppercase tracking-wider font-semibold truncate drop-shadow">
+                    #{currentAction.id}: {currentAction.title}
                   </span>
                 </div>
-                <span className="px-2.5 py-1 rounded bg-black/75 border border-white/20 text-xs font-mono text-white font-bold drop-shadow">
+                <span className="px-2 py-0.5 sm:px-2.5 sm:py-1 rounded bg-black/80 border border-white/20 text-[11px] sm:text-xs font-mono text-white font-bold drop-shadow shrink-0">
                   {formatSeconds(currentTime)} / {formatSeconds(duration)}
                 </span>
               </div>
 
               {/* Play Overlay Button if paused */}
-              {!isPlaying && (
+              {!isPlaying && !hasError && (
                 <div
                   onClick={togglePlay}
                   className="absolute inset-0 bg-black/40 flex items-center justify-center cursor-pointer z-10 transition-opacity"
                 >
                   <motion.div
                     whileHover={{ scale: 1.1 }}
-                    whileTap={{ scale: 0.95 }}
-                    className="w-18 h-18 rounded-full bg-blue-600 text-white flex items-center justify-center shadow-2xl shadow-blue-600/60 border border-white/30"
+                    whileTap={{ scale: 0.92 }}
+                    className="w-16 h-16 sm:w-20 sm:h-20 rounded-full bg-blue-600 hover:bg-blue-500 text-white flex items-center justify-center shadow-2xl shadow-blue-600/60 border-2 border-white/40 cursor-pointer"
                   >
-                    <Play className="w-8 h-8 fill-white ml-1" />
+                    <Play className="w-7 h-7 sm:w-9 sm:h-9 fill-white ml-1" />
                   </motion.div>
                 </div>
               )}
 
               {/* Bottom Custom Player Controls Bar */}
-              <div className="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-black/95 via-black/70 to-transparent flex flex-col gap-2 z-10 transition-opacity duration-200">
+              <div
+                className={`absolute bottom-0 left-0 right-0 p-3 sm:p-4 bg-gradient-to-t from-black/95 via-black/80 to-transparent flex flex-col gap-2 z-10 transition-opacity duration-300 ${
+                  showControls || !isPlaying ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'
+                }`}
+              >
                 
-                {/* Scrubbing timeline bar */}
+                {/* Scrubbing timeline bar with large touch hit area */}
                 <div
-                  onClick={(e) => {
-                    const rect = e.currentTarget.getBoundingClientRect();
-                    const pos = (e.clientX - rect.left) / rect.width;
-                    if (videoRef.current) {
-                      videoRef.current.currentTime = pos * duration;
-                    }
-                  }}
-                  className="relative w-full h-2 bg-slate-800 rounded-full cursor-pointer overflow-hidden group/bar"
+                  onClick={handleSeek}
+                  onTouchStart={handleSeek}
+                  className="relative w-full py-2 -my-2 cursor-pointer group/bar"
                 >
-                  <div
-                    className="h-full bg-gradient-to-r from-blue-600 to-blue-400 transition-all duration-100"
-                    style={{ width: `${(currentTime / duration) * 100}%` }}
-                  />
+                  <div className="w-full h-1.5 sm:h-2 bg-slate-800 rounded-full overflow-hidden">
+                    <div
+                      className="h-full bg-gradient-to-r from-blue-600 via-blue-500 to-sky-400 transition-all duration-75"
+                      style={{ width: `${Math.min(100, (currentTime / (duration || 376)) * 100)}%` }}
+                    />
+                  </div>
                 </div>
 
-                <div className="flex items-center justify-between text-xs text-slate-200">
-                  <div className="flex items-center gap-3">
-                    <button onClick={togglePlay} className="p-1 hover:text-white cursor-pointer">
+                {/* Control buttons row */}
+                <div className="flex items-center justify-between text-xs text-slate-200 mt-1">
+                  <div className="flex items-center gap-2 sm:gap-3">
+                    <button
+                      onClick={togglePlay}
+                      className="p-1.5 hover:text-white rounded-lg bg-white/5 hover:bg-white/10 cursor-pointer transition-colors"
+                      title={isPlaying ? "Pausar" : "Reproducir"}
+                    >
                       {isPlaying ? <Pause className="w-4 h-4 fill-white" /> : <Play className="w-4 h-4 fill-white" />}
                     </button>
-                    <button onClick={toggleMute} className="p-1 hover:text-white cursor-pointer">
-                      {isMuted ? <VolumeX className="w-4 h-4 text-red-400" /> : <Volume2 className="w-4 h-4" />}
+
+                    <button
+                      onClick={toggleMute}
+                      className="p-1.5 hover:text-white rounded-lg bg-white/5 hover:bg-white/10 cursor-pointer transition-colors"
+                      title={isMuted ? "Activar sonido" : "Silenciar"}
+                    >
+                      {isMuted ? <VolumeX className="w-4 h-4 text-red-400" /> : <Volume2 className="w-4 h-4 text-emerald-400" />}
                     </button>
-                    <span className="font-mono text-white text-xs">
-                      {formatSeconds(currentTime)} • {currentAction.title}
+
+                    <span className="font-mono text-white text-[11px] sm:text-xs">
+                      {formatSeconds(currentTime)}
                     </span>
                   </div>
 
-                  <div className="flex items-center gap-2">
+                  <div className="flex items-center gap-1.5 sm:gap-2">
                     <button
                       onClick={() => {
-                        if (videoRef.current) videoRef.current.currentTime = currentAction.seconds;
+                        if (videoRef.current) {
+                          videoRef.current.currentTime = currentAction.seconds;
+                        }
                       }}
-                      className="p-1 hover:text-white cursor-pointer"
+                      className="p-1.5 hover:text-white rounded-lg bg-white/5 hover:bg-white/10 cursor-pointer transition-colors"
                       title="Reiniciar jugada actual"
                     >
                       <RotateCcw className="w-3.5 h-3.5" />
                     </button>
+
                     <button
-                      onClick={() => {
-                        if (videoRef.current) {
-                          if (document.fullscreenElement) {
-                            document.exitFullscreen();
-                          } else {
-                            videoRef.current.requestFullscreen();
-                          }
-                        }
-                      }}
-                      className="p-1 hover:text-white cursor-pointer"
+                      onClick={handleFullscreen}
+                      className="p-1.5 hover:text-white rounded-lg bg-white/5 hover:bg-white/10 cursor-pointer transition-colors"
                       title="Pantalla completa"
                     >
-                      <Maximize2 className="w-4 h-4" />
+                      <Maximize2 className="w-3.5 h-3.5" />
                     </button>
                   </div>
                 </div>
 
               </div>
 
+            </div>
+
+            {/* Quick helper tip under video */}
+            <div className="flex items-center justify-between text-[11px] font-mono text-slate-400 px-1">
+              <span>Seleccione cualquier acción en la lista para reproducirla al instante.</span>
+              <span className="text-blue-300 font-semibold">{currentAction.timecode}</span>
             </div>
           </div>
 
@@ -287,7 +427,7 @@ export const VideoSection = () => {
             </div>
 
             {/* Scrollable list of actions */}
-            <div className="flex flex-col gap-2 max-h-[500px] overflow-y-auto pr-1">
+            <div className="flex flex-col gap-2 max-h-[460px] sm:max-h-[520px] overflow-y-auto pr-1">
               <AnimatePresence mode="popLayout">
                 {filteredActions.map((action) => {
                   const isCurrent = action.id === activeActionId;
@@ -298,20 +438,21 @@ export const VideoSection = () => {
                       initial={{ opacity: 0, y: 10 }}
                       animate={{ opacity: 1, y: 0 }}
                       exit={{ opacity: 0, scale: 0.95 }}
-                      transition={{ duration: 0.2 }}
-                      whileHover={{ x: 4 }}
+                      transition={{ duration: 0.15 }}
+                      whileHover={{ x: 3 }}
+                      whileTap={{ scale: 0.99 }}
                       onClick={() => handleSelectAction(action)}
-                      className={`group p-3.5 rounded-xl border transition-all duration-200 cursor-pointer flex items-start gap-3.5 ${
+                      className={`group p-3 sm:p-3.5 rounded-xl border transition-all duration-200 cursor-pointer flex items-start gap-3 ${
                         isCurrent
-                          ? 'bg-slate-900 border-blue-500 shadow-lg shadow-blue-600/20'
-                          : 'bg-slate-900/50 hover:bg-slate-850 border-white/10 hover:border-blue-400/30'
+                          ? 'bg-slate-900 border-blue-500 shadow-lg shadow-blue-600/25'
+                          : 'bg-slate-900/60 hover:bg-slate-850 border-white/10 hover:border-blue-400/40'
                       }`}
                     >
                       {/* Time badge */}
                       <div
-                        className={`px-2.5 py-1 rounded font-mono text-xs font-bold shrink-0 transition-colors ${
+                        className={`px-2.5 py-1 rounded-lg font-mono text-xs font-bold shrink-0 transition-colors ${
                           isCurrent
-                            ? 'bg-blue-600 text-white'
+                            ? 'bg-blue-600 text-white shadow-md shadow-blue-600/40'
                             : 'bg-slate-800 text-slate-300 group-hover:bg-blue-950 group-hover:text-blue-300'
                         }`}
                       >

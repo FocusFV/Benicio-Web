@@ -53,7 +53,7 @@ export const Hero = ({ onOpenDossier }: HeroProps) => {
                 <span>•</span>
                 <span>{PLAYER_DATA.personal.originCity}</span>
               </div>
-              <h1 className="text-6xl sm:text-7xl md:text-8xl lg:text-9xl font-black uppercase tracking-tight text-white leading-[0.88] font-display">
+              <h1 className="text-5xl sm:text-7xl md:text-8xl lg:text-9xl font-black uppercase tracking-tight text-white leading-[0.92] sm:leading-[0.88] font-display break-words">
                 BENICIO
                 <br />
                 <span className="text-transparent bg-clip-text bg-gradient-to-r from-white via-blue-100 to-blue-400">
@@ -98,15 +98,15 @@ export const Hero = ({ onOpenDossier }: HeroProps) => {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.7, delay: 0.45, ease: 'easeOut' }}
-              className="mt-8 flex flex-wrap items-center gap-4"
+              className="mt-8 flex flex-col sm:flex-row items-stretch sm:items-center gap-3.5 w-full sm:w-auto"
             >
               <motion.a
                 whileHover={{ scale: 1.04, y: -2 }}
                 whileTap={{ scale: 0.97 }}
                 href="#video"
-                className="group flex items-center gap-3 px-6 py-3.5 rounded-xl bg-blue-600 text-white font-bold text-xs sm:text-sm tracking-wide uppercase hover:bg-blue-500 transition-all duration-200 shadow-xl shadow-blue-600/35 cursor-pointer border border-blue-400/30"
+                className="group flex items-center justify-center gap-3 px-6 py-3.5 sm:py-3.5 rounded-xl bg-blue-600 text-white font-bold text-xs sm:text-sm tracking-wide uppercase hover:bg-blue-500 transition-all duration-200 shadow-xl shadow-blue-600/35 cursor-pointer border border-blue-400/30 text-center"
               >
-                <Play className="w-4 h-4 fill-white transition-transform group-hover:scale-110" />
+                <Play className="w-4 h-4 fill-white transition-transform group-hover:scale-110 shrink-0" />
                 <span>Ver Jugadas en Video (00:12 — 06:16)</span>
               </motion.a>
 
@@ -114,9 +114,9 @@ export const Hero = ({ onOpenDossier }: HeroProps) => {
                 whileHover={{ scale: 1.03, y: -2 }}
                 whileTap={{ scale: 0.97 }}
                 onClick={onOpenDossier}
-                className="flex items-center gap-2.5 px-6 py-3.5 rounded-xl bg-slate-900/90 hover:bg-slate-800 border border-white/15 text-white font-medium text-xs sm:text-sm tracking-wide transition-all duration-200 cursor-pointer shadow-lg hover:border-blue-400/40"
+                className="flex items-center justify-center gap-2.5 px-6 py-3.5 rounded-xl bg-slate-900/90 hover:bg-slate-800 border border-white/15 text-white font-medium text-xs sm:text-sm tracking-wide transition-all duration-200 cursor-pointer shadow-lg hover:border-blue-400/40 text-center"
               >
-                <Download className="w-4 h-4 text-blue-400" />
+                <Download className="w-4 h-4 text-blue-400 shrink-0" />
                 <span>Descargar Ficha PDF</span>
               </motion.button>
             </motion.div>
