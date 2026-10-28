@@ -1,6 +1,7 @@
 import { motion } from 'framer-motion';
 import { Compass, Calendar, MapPin, Award } from 'lucide-react';
 import { PLAYER_DATA } from '../data/playerData';
+import badgesImg from '../assets/club_badges_real.png';
 
 export const TrajectoryTimeline = () => {
   return (
@@ -8,7 +9,7 @@ export const TrajectoryTimeline = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Header */}
-        <div className="flex flex-col md:flex-row md:items-end justify-between mb-16">
+        <div className="flex flex-col md:flex-row md:items-end justify-between mb-12">
           <div>
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/5 border border-white/10 text-xs font-mono uppercase tracking-wider text-[#45f3ff] mb-3">
               <Compass className="w-3.5 h-3.5" />
@@ -19,8 +20,30 @@ export const TrajectoryTimeline = () => {
             </h2>
           </div>
           <p className="text-zinc-400 text-sm max-w-md mt-4 md:mt-0 font-normal">
-            Evolución progresiva desde canteras formativas de primer orden en el fútbol argentino hasta el rodaje competitivo en primera división local.
+            Evolución progresiva desde canteras formativas de primer nivel (Newell's), desarrollo en ADIUR, una temporada de alta exigencia en AFA con Belgrano y retorno titular.
           </p>
+        </div>
+
+        {/* Real Club Badges Strip from the Video */}
+        <div className="mb-14 p-5 rounded-2xl bg-zinc-950/80 border border-white/10 flex flex-col md:flex-row items-center justify-between gap-6 shadow-xl">
+          <div className="flex items-center gap-3">
+            <span className="w-2.5 h-2.5 rounded-full bg-emerald-400"></span>
+            <div>
+              <span className="text-xs font-mono uppercase tracking-widest text-zinc-400 block">
+                Instituciones Oficiales
+              </span>
+              <span className="text-sm font-bold text-white">
+                Newell's Old Boys • A.D.I.U.R. • Belgrano de Córdoba
+              </span>
+            </div>
+          </div>
+          <div className="bg-black/60 p-2.5 rounded-xl border border-white/10 flex items-center justify-center">
+            <img
+              src={badgesImg}
+              alt="Escudos de clubes: Newell's, ADIUR, Belgrano de Córdoba"
+              className="h-10 sm:h-12 w-auto object-contain filter brightness-105"
+            />
+          </div>
         </div>
 
         {/* Timeline Cards */}
@@ -33,7 +56,7 @@ export const TrajectoryTimeline = () => {
               const isEven = index % 2 === 0;
               return (
                 <motion.div
-                  key={item.club}
+                  key={`${item.club}-${item.period}`}
                   initial={{ opacity: 0, y: 30 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
@@ -44,13 +67,18 @@ export const TrajectoryTimeline = () => {
                 >
                   {/* Content Box (takes half width on desktop) */}
                   <div className="w-full lg:w-[46%]">
-                    <div className="p-7 rounded-2xl bg-zinc-900/70 border border-white/10 hover:border-white/20 transition-all duration-300 shadow-xl group">
+                    <div className="p-7 rounded-2xl bg-zinc-900/70 border border-white/10 hover:border-white/20 transition-all duration-300 shadow-xl group hover:-translate-y-1">
                       
                       {/* Top Badges */}
                       <div className="flex flex-wrap items-center justify-between gap-2 mb-3">
-                        <span className="text-xs font-mono font-semibold px-2.5 py-1 rounded bg-[#45f3ff]/10 text-[#45f3ff] border border-[#45f3ff]/20">
-                          {item.badgeText}
-                        </span>
+                        <div className="flex items-center gap-2">
+                          <span className="text-xs font-mono font-semibold px-2.5 py-1 rounded bg-[#45f3ff]/10 text-[#45f3ff] border border-[#45f3ff]/20">
+                            {item.badgeText}
+                          </span>
+                          <span className="text-[11px] font-mono text-zinc-400 bg-white/5 px-2 py-0.5 rounded">
+                            {item.yearsCount}
+                          </span>
+                        </div>
                         <div className="flex items-center gap-1.5 text-xs font-mono text-zinc-400">
                           <Calendar className="w-3.5 h-3.5 text-zinc-500" />
                           <span>{item.period}</span>

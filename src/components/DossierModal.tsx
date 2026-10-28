@@ -60,7 +60,7 @@ export const DossierModal = ({ isOpen, onClose }: DossierModalProps) => {
             <div className="flex flex-col sm:flex-row sm:items-start justify-between pb-6 border-b-2 border-zinc-900 gap-4">
               <div>
                 <span className="text-[11px] font-mono tracking-widest text-zinc-500 uppercase font-bold">
-                  DOSSIER DE RENDIMIENTO DEPORTIVO • 2024/2025
+                  DOSSIER DE RENDIMIENTO DEPORTIVO • TEMPORADA 2025/2026
                 </span>
                 <h1 className="text-3xl sm:text-4xl font-black uppercase tracking-tight text-zinc-950 font-display mt-1">
                   {PLAYER_DATA.personal.fullName}
@@ -76,7 +76,7 @@ export const DossierModal = ({ isOpen, onClose }: DossierModalProps) => {
               <div className="text-right sm:text-right font-mono text-xs text-zinc-500">
                 <div className="font-bold text-zinc-900 text-sm">CLUB ACTUAL: {PLAYER_DATA.personal.currentClub}</div>
                 <div>{PLAYER_DATA.personal.originCity}</div>
-                <div>Nacimiento: {PLAYER_DATA.personal.birthDate}</div>
+                <div>Nacimiento: {PLAYER_DATA.personal.birthDate} (18 años)</div>
               </div>
             </div>
 
@@ -100,7 +100,7 @@ export const DossierModal = ({ isOpen, onClose }: DossierModalProps) => {
                 </div>
                 <div className="p-3 rounded-lg bg-zinc-100 border border-zinc-200">
                   <div className="text-[10px] font-mono uppercase text-zinc-500">Distancia Media</div>
-                  <div className="text-xl font-black text-zinc-900 mt-0.5">8,079 <span className="text-xs font-normal">m</span></div>
+                  <div className="text-xl font-black text-zinc-900 mt-0.5">8,879 <span className="text-xs font-normal">m</span></div>
                 </div>
                 <div className="p-3 rounded-lg bg-zinc-100 border border-zinc-200">
                   <div className="text-[10px] font-mono uppercase text-zinc-500">Sprints / P.</div>
@@ -123,7 +123,7 @@ export const DossierModal = ({ isOpen, onClose }: DossierModalProps) => {
                 <ul className="space-y-1.5 text-zinc-700">
                   <li>• Cambio de frente de más de 40 metros con pie zurdo con alta precisión.</li>
                   <li>• Capacidad para romper líneas de presión con pases rasos verticales.</li>
-                  <li>• Sangre fría en salida bajo presión: amague y descarga segura hacia los laterales.</li>
+                  <li>• Sangre fría en salida bajo presión: amague y descarga limpia hacia bandas.</li>
                   <li>• Envíos pinchados en profundidad a la espalda de la zaga contraria.</li>
                 </ul>
               </div>
@@ -158,7 +158,7 @@ export const DossierModal = ({ isOpen, onClose }: DossierModalProps) => {
                 </thead>
                 <tbody className="divide-y divide-zinc-200 text-zinc-800">
                   {PLAYER_DATA.trajectory.map((t) => (
-                    <tr key={t.club}>
+                    <tr key={`${t.club}-${t.period}`}>
                       <td className="py-2 font-mono font-semibold">{t.period}</td>
                       <td className="py-2 font-bold text-zinc-950">{t.club}</td>
                       <td className="py-2">{t.role}</td>
@@ -171,7 +171,7 @@ export const DossierModal = ({ isOpen, onClose }: DossierModalProps) => {
 
             {/* Footer with Contact info */}
             <div className="pt-4 border-t-2 border-zinc-900 flex items-center justify-between text-[11px] font-mono text-zinc-500">
-              <div>BENICIO OCAÑA ZAHLER • MARCADOR CENTRAL</div>
+              <div>BENICIO OCAÑA ZAHLER • MARCADOR CENTRAL #6</div>
               <div>ROSARIO, SANTA FE • ARGENTINA</div>
             </div>
 

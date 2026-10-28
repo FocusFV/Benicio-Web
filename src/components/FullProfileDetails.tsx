@@ -8,17 +8,17 @@ interface FullProfileDetailsProps {
 export const FullProfileDetails = ({ onOpenDossier }: FullProfileDetailsProps) => {
   const specs = [
     { label: 'Nombre Completo', value: PLAYER_DATA.personal.fullName },
-    { label: 'Fecha de Nacimiento', value: `${PLAYER_DATA.personal.birthDate} (${PLAYER_DATA.personal.age} años)` },
+    { label: 'Fecha de Nacimiento', value: `${PLAYER_DATA.personal.birthDate} (18 años)` },
     { label: 'Nacionalidad', value: `${PLAYER_DATA.personal.nationality} (Rosario, Santa Fe)` },
     { label: 'Altura & Peso', value: `${PLAYER_DATA.personal.height} • ${PLAYER_DATA.personal.weight}` },
     { label: 'Posición Principal', value: PLAYER_DATA.personal.primaryPosition },
     { label: 'Posición Secundaria', value: PLAYER_DATA.personal.secondaryPosition },
     { label: 'Pierna Hábil', value: PLAYER_DATA.personal.preferredFoot },
-    { label: 'Club Actual', value: `${PLAYER_DATA.personal.currentClub} (Rosario)` },
-    { label: 'Historial Canteras', value: "Newell's Old Boys (9 años) • C.A. Belgrano" },
+    { label: 'Club Actual', value: `${PLAYER_DATA.personal.currentClub} (Dorsal #6)` },
+    { label: 'Historial Canteras', value: "Newell's Old Boys (8 años) • ADIUR • Belgrano (1 temp.)" },
     { label: 'Registro de Disciplina', value: "1 Tarjeta Amarilla • 0 Tarjetas Rojas (1040 min)" },
     { label: 'Pico de Velocidad GPS', value: "33.0 km/h (Rango de élite para zaguero central)" },
-    { label: 'Titularidad Registrada', value: "96.3% (12 partidos disputados)" }
+    { label: 'Distancia Promedio', value: "8,879 metros por partido oficial" }
   ];
 
   return (
@@ -78,7 +78,7 @@ export const FullProfileDetails = ({ onOpenDossier }: FullProfileDetailsProps) =
                 Conclusión del Reporte de Seguimiento
               </span>
               <p className="text-xs sm:text-sm text-zinc-300 leading-relaxed">
-                "Zaguero central moderno que reúne las condiciones físicas indispensables para el fútbol de alto ritmo (1.88 m, 86 kg y 33 km/h de velocidad máxima) combinadas con una lectura pulcra de juego, solvencia técnica para iniciar ataques con pie zurdo y una notable sobriedad defensiva demostrada en su bajo índice de faltas sancionadas."
+                "Zaguero central moderno que reúne las condiciones físicas indispensables para el fútbol de alta exigencia (1.88 m, 88 kg y 33 km/h de velocidad máxima) combinadas con una lectura pulcra de juego, solvencia técnica para iniciar ataques con pie zurdo, una temporada formativa en AFA con Belgrano y una notable sobriedad disciplinaria (1 sola tarjeta amarilla en 1040 minutos de partido)."
               </p>
             </div>
           </div>
@@ -99,7 +99,7 @@ export const FullProfileDetails = ({ onOpenDossier }: FullProfileDetailsProps) =
                   <div>
                     <h5 className="text-xs font-bold text-white">Perfil Zurdo Natural</h5>
                     <p className="text-[11px] text-zinc-400 mt-0.5">
-                      Condición muy codiciada en el mercado para armar la línea de 4 o líbero en línea de 3.
+                      Condición altamente codiciada en el mercado para armar la línea de 4 o zaga en línea de 3.
                     </p>
                   </div>
                 </div>
@@ -107,9 +107,9 @@ export const FullProfileDetails = ({ onOpenDossier }: FullProfileDetailsProps) =
                 <div className="flex items-start gap-3">
                   <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0 mt-0.5" />
                   <div>
-                    <h5 className="text-xs font-bold text-white">Formación de Cantera AFA</h5>
+                    <h5 className="text-xs font-bold text-white">Formación de Cantera Newell's</h5>
                     <p className="text-[11px] text-zinc-400 mt-0.5">
-                      9 años ininterrumpidos en Newell's Old Boys incorporando conceptos de presión, salida y orden.
+                      8 años ininterrumpidos en una de las mejores escuelas formativas del fútbol argentino.
                     </p>
                   </div>
                 </div>
@@ -117,9 +117,9 @@ export const FullProfileDetails = ({ onOpenDossier }: FullProfileDetailsProps) =
                 <div className="flex items-start gap-3">
                   <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0 mt-0.5" />
                   <div>
-                    <h5 className="text-xs font-bold text-white">Capacidad de Pase Largo</h5>
+                    <h5 className="text-xs font-bold text-white">Velocidad & Cobertura (33 km/h)</h5>
                     <p className="text-[11px] text-zinc-400 mt-0.5">
-                      Cambios de frente y pelotas profundas que transforman recuperaciones en peligro de gol.
+                      Velocidad en el 5% superior para centrales de 1.88 m, permitiendo defender en campo rival.
                     </p>
                   </div>
                 </div>
@@ -127,9 +127,9 @@ export const FullProfileDetails = ({ onOpenDossier }: FullProfileDetailsProps) =
                 <div className="flex items-start gap-3">
                   <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0 mt-0.5" />
                   <div>
-                    <h5 className="text-xs font-bold text-white">Juego Aéreo Integral</h5>
+                    <h5 className="text-xs font-bold text-white">Juego Aéreo & Pelota Parada</h5>
                     <p className="text-[11px] text-zinc-400 mt-0.5">
-                      Ganador constante en balones divididos y salto ofensivo en córners a favor.
+                      Ganador de duelos aéreos en mitad de cancha y presencia de gol en córners a favor.
                     </p>
                   </div>
                 </div>
@@ -138,7 +138,7 @@ export const FullProfileDetails = ({ onOpenDossier }: FullProfileDetailsProps) =
 
             <div className="mt-8 pt-5 border-t border-white/10 text-center">
               <span className="text-[11px] font-mono text-zinc-400">
-                A.D.I.U.R. • Temporada Oficial
+                A.D.I.U.R. • Dorsal #6 Oficial
               </span>
             </div>
 

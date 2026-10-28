@@ -2,47 +2,55 @@ import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Camera, X, Maximize2 } from 'lucide-react';
 
-interface PhotoItem {
+import photoAction from '../assets/benicio_action_orange.png';
+import photoBack from '../assets/benicio_back_dorsal6.png';
+import photoPitch from '../assets/tactical_pitch_real.png';
+import screenshotStats from '../assets/screenshot_stats.png';
+
+interface GalleryItem {
   id: number;
   title: string;
   category: string;
   caption: string;
-  placeholderBg: string;
+  image: string;
+  aspectClass: string;
 }
 
 export const PhotoGallery = () => {
-  const [selectedPhoto, setSelectedPhoto] = useState<PhotoItem | null>(null);
+  const [selectedPhoto, setSelectedPhoto] = useState<GalleryItem | null>(null);
 
-  // Gallery items with athletic styled aesthetic cards
-  // User can easily swap the background with their actual photos of Benicio
-  const photos: PhotoItem[] = [
+  const galleryItems: GalleryItem[] = [
     {
       id: 1,
-      title: "Salida desde el Fondo",
-      category: "Acción en Partido",
-      caption: "Conducción con pierna zurda y visión de juego para ruptura vertical de líneas.",
-      placeholderBg: "from-zinc-900 via-zinc-800 to-zinc-950"
+      title: "Conducción y Salida desde el Fondo",
+      category: "Acción Oficial • A.D.I.U.R.",
+      caption: "Salida estructurada con balón dominado y lectura de campo para romper líneas con pase filtrado.",
+      image: photoAction,
+      aspectClass: "object-contain object-bottom bg-gradient-to-t from-black via-zinc-900 to-zinc-950"
     },
     {
       id: 2,
-      title: "Elevación & Juego Aéreo",
-      category: "Duelo Aéreo",
-      caption: "Imponiendo 1.88 m de altura en el centro del campo en partido oficial.",
-      placeholderBg: "from-zinc-950 via-zinc-900 to-zinc-800"
+      title: "Remate y Pase Vertical — Dorsal #6",
+      category: "Perfil Técnico Zurdo",
+      caption: "Impacto con pierna zurda en pase frontal teledirigido hacia la espalda de los centrales rivales.",
+      image: photoBack,
+      aspectClass: "object-contain object-bottom bg-gradient-to-t from-black via-zinc-900 to-zinc-950"
     },
     {
       id: 3,
-      title: "Cierre & Barrida al Piso",
-      category: "Cobertura Defensiva",
-      caption: "Quite limpio al piso sobre el costado neutralizando el contraataque rival.",
-      placeholderBg: "from-zinc-900 via-zinc-950 to-zinc-900"
+      title: "Esquema Táctico en Zaga Central",
+      category: "Ubicación en Cancha",
+      caption: "Disposición en el campo de juego cubriendo ambos perfiles centrales (izquierdo y derecho).",
+      image: photoPitch,
+      aspectClass: "object-contain object-center bg-zinc-950"
     },
     {
       id: 4,
-      title: "Zaga Central en A.D.I.U.R.",
-      category: "Competencia",
-      caption: "Liderazgo en la zaga con 96.3% de titularidad en el torneo actual.",
-      placeholderBg: "from-zinc-800 via-zinc-900 to-zinc-950"
+      title: "Planilla de Monitoreo & GPS",
+      category: "Datos de Rendimiento",
+      caption: "Ficha oficial de métricas: 8879 m de recorrido promedio, 33 km/h de velocidad máxima y 96.3% de titularidad.",
+      image: screenshotStats,
+      aspectClass: "object-cover object-left bg-zinc-950"
     }
   ];
 
@@ -58,17 +66,17 @@ export const PhotoGallery = () => {
               <span>Registro Fotográfico & Cobertura</span>
             </div>
             <h2 className="text-3xl sm:text-4xl md:text-5xl font-black uppercase text-white font-display">
-              Galería en Acción
+              Galería & Material de Análisis
             </h2>
           </div>
           <p className="text-zinc-400 text-sm max-w-md mt-3 md:mt-0 font-normal">
-            Imágenes de competencia oficial, duelos individuales y secuencias de partido.
+            Capturas y material gráfico extraídos directamente del video de seguimiento oficial de partidos.
           </p>
         </div>
 
-        {/* Photos Grid */}
+        {/* Gallery Grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-          {photos.map((item, index) => (
+          {galleryItems.map((item, index) => (
             <motion.div
               key={item.id}
               initial={{ opacity: 0, y: 30 }}
@@ -77,42 +85,37 @@ export const PhotoGallery = () => {
               transition={{ duration: 0.5, delay: index * 0.1 }}
               whileHover={{ y: -8 }}
               onClick={() => setSelectedPhoto(item)}
-              className="group relative rounded-2xl overflow-hidden border border-white/10 bg-zinc-900 shadow-xl cursor-pointer"
+              className="group relative rounded-2xl overflow-hidden border border-white/10 bg-zinc-950 shadow-2xl cursor-pointer"
             >
-              {/* Aspect Ratio Box with Stylized Athletic Graphic */}
-              <div
-                className={`w-full aspect-[4/5] bg-gradient-to-br ${item.placeholderBg} p-6 flex flex-col justify-between relative overflow-hidden transition-transform duration-500 group-hover:scale-105`}
-              >
-                {/* Athletic backdrop lines */}
-                <div className="absolute inset-0 bg-grid-pattern opacity-40 pointer-events-none" />
-                <div className="absolute -right-6 -bottom-6 w-36 h-36 bg-[#45f3ff]/10 rounded-full blur-2xl group-hover:bg-[#45f3ff]/20 transition-colors pointer-events-none" />
+              {/* Image Frame */}
+              <div className="w-full aspect-[3/4] relative overflow-hidden p-3 flex flex-col justify-between">
+                
+                {/* Background image container */}
+                <div className="absolute inset-0 z-0 p-3">
+                  <img
+                    src={item.image}
+                    alt={item.title}
+                    className={`w-full h-full rounded-xl ${item.aspectClass} transition-transform duration-500 group-hover:scale-105`}
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-black/40 rounded-xl" />
+                </div>
 
                 {/* Top Badge */}
                 <div className="relative z-10 flex items-center justify-between">
-                  <span className="text-[11px] font-mono px-2 py-0.5 rounded bg-black/60 border border-white/10 text-zinc-300">
+                  <span className="text-[10px] font-mono px-2 py-0.5 rounded-md bg-black/80 backdrop-blur-sm border border-white/15 text-zinc-300">
                     {item.category}
                   </span>
-                  <div className="w-8 h-8 rounded-full bg-black/50 border border-white/10 flex items-center justify-center text-white/70 group-hover:text-white group-hover:scale-110 transition-all">
+                  <div className="w-7 h-7 rounded-full bg-black/60 border border-white/15 flex items-center justify-center text-white/80 group-hover:text-white group-hover:scale-110 transition-all">
                     <Maximize2 className="w-3.5 h-3.5" />
                   </div>
                 </div>
 
-                {/* Visual Centerpiece Number / Emblem */}
-                <div className="relative z-10 text-center my-auto">
-                  <div className="text-6xl font-black text-white/10 font-display tracking-widest group-hover:text-white/20 transition-colors">
-                    #06
-                  </div>
-                  <div className="text-xs font-mono text-zinc-400 mt-1">
-                    BENICIO OCAÑA
-                  </div>
-                </div>
-
                 {/* Bottom Overlay Info */}
-                <div className="relative z-10 pt-3 border-t border-white/10">
-                  <h4 className="text-base font-bold text-white group-hover:text-[#45f3ff] transition-colors">
+                <div className="relative z-10 pt-3">
+                  <h4 className="text-sm font-bold text-white group-hover:text-[#45f3ff] transition-colors leading-snug">
                     {item.title}
                   </h4>
-                  <p className="text-xs text-zinc-400 line-clamp-1 mt-0.5">
+                  <p className="text-[11px] text-zinc-400 line-clamp-1 mt-0.5 font-normal">
                     {item.caption}
                   </p>
                 </div>
@@ -138,34 +141,35 @@ export const PhotoGallery = () => {
               animate={{ scale: 1, opacity: 1 }}
               exit={{ scale: 0.9, opacity: 0 }}
               onClick={(e) => e.stopPropagation()}
-              className="relative max-w-2xl w-full rounded-2xl bg-zinc-950 border border-white/15 p-6 shadow-2xl"
+              className="relative max-w-2xl w-full rounded-2xl bg-zinc-950 border border-white/15 p-6 shadow-2xl overflow-hidden"
             >
               <button
                 onClick={() => setSelectedPhoto(null)}
-                className="absolute top-4 right-4 p-2 rounded-full bg-white/10 text-white hover:bg-white/20 cursor-pointer"
+                className="absolute top-4 right-4 p-2 rounded-full bg-white/10 text-white hover:bg-white/20 cursor-pointer z-10"
               >
                 <X className="w-5 h-5" />
               </button>
 
-              <div className="w-full aspect-video rounded-xl bg-gradient-to-br from-zinc-900 to-black border border-white/10 flex items-center justify-center mb-4 relative overflow-hidden">
-                <div className="text-center p-6">
-                  <div className="text-7xl font-black text-white/10 font-display tracking-widest">
-                    #06 • BOZ
-                  </div>
-                  <p className="text-sm font-mono text-[#45f3ff] mt-2">
-                    {selectedPhoto.category} • Marcador Central
-                  </p>
-                </div>
+              <div className="w-full max-h-[60vh] rounded-xl bg-black border border-white/10 flex items-center justify-center mb-4 overflow-hidden">
+                <img
+                  src={selectedPhoto.image}
+                  alt={selectedPhoto.title}
+                  className="max-h-[58vh] w-auto object-contain"
+                />
               </div>
 
+              <div className="flex items-center justify-between mb-1">
+                <span className="text-xs font-mono text-emerald-400">
+                  {selectedPhoto.category}
+                </span>
+                <span className="text-xs font-mono text-zinc-500">
+                  Benicio Ocaña Zahler #6
+                </span>
+              </div>
               <h3 className="text-xl font-bold text-white">{selectedPhoto.title}</h3>
               <p className="text-sm text-zinc-300 mt-2 leading-relaxed">
                 {selectedPhoto.caption}
               </p>
-              <div className="mt-4 pt-3 border-t border-white/10 flex items-center justify-between text-xs text-zinc-400 font-mono">
-                <span>Benicio Ocaña Zahler</span>
-                <span>Rosario, Argentina</span>
-              </div>
             </motion.div>
           </motion.div>
         )}

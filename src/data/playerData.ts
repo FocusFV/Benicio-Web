@@ -15,14 +15,7 @@ export interface ClubTrajectory {
   location: string;
   description: string;
   badgeText: string;
-}
-
-export interface MetricItem {
-  label: string;
-  value: string;
-  unit?: string;
-  subtitle: string;
-  trend?: string;
+  yearsCount: string;
 }
 
 export const PLAYER_DATA = {
@@ -30,12 +23,12 @@ export const PLAYER_DATA = {
     fullName: "Benicio Ocaña Zahler",
     shortName: "Benicio Ocaña",
     initials: "BOZ",
-    birthDate: "20/02/2006",
+    birthDate: "20/02/2008",
     age: 18,
     nationality: "Argentina",
     originCity: "Rosario, Santa Fe",
     height: "1.88 m",
-    weight: "86 kg",
+    weight: "88 kg",
     primaryPosition: "Marcador Central",
     secondaryPosition: "Zaguero Izquierdo / Derecho",
     preferredFoot: "Zurda (Ambidiestro)",
@@ -53,6 +46,13 @@ export const PLAYER_DATA = {
       highlight: true
     },
     {
+      label: "Distancia Promedio",
+      value: "8,879",
+      unit: "m",
+      subtitle: "Recorrido por encuentro",
+      highlight: false
+    },
+    {
       label: "Titularidad",
       value: "96.3",
       unit: "%",
@@ -60,17 +60,10 @@ export const PLAYER_DATA = {
       highlight: false
     },
     {
-      label: "Tiempo en Cancha",
+      label: "Tiempo de Juego",
       value: "1,040",
       unit: "min",
       subtitle: "Continuidad competitiva",
-      highlight: false
-    },
-    {
-      label: "Distancia Media",
-      value: "8,079",
-      unit: "m",
-      subtitle: "Recorrido por encuentro",
       highlight: false
     },
     {
@@ -97,45 +90,58 @@ export const PLAYER_DATA = {
     },
     {
       title: "Juego Aéreo Dominante (1.88 m)",
-      level: 90,
+      level: 91,
       description: "Impacto constante en duelos aéreos en mitad de cancha y contundencia en ambas áreas, siendo referencia de remate en jugadas de pelota parada ofensiva."
     },
     {
       title: "Velocidad de Repliegue & Coberturas",
-      level: 88,
+      level: 90,
       description: "Pico de velocidad de 33 km/h que permite defender con la línea adelantada, cerrar espacios a espaldas de los laterales y ganar duelos al espacio mano a mano."
     },
     {
       title: "Temporización & Barrida Quirúrgica",
       level: 89,
-      description: "Lectura defensiva para medir el avance del rival, ganar la posición con el cuerpo sin falta y ejecutar quites al piso limpios con gran timing."
+      description: "Lectura defensiva para medir el avance del rival, ganar la posición con el cuerpo (88 kg) sin falta y ejecutar quites al piso limpios con gran timing."
     }
   ],
 
+  // Trayectoria corregida exactamente con el video oficial
   trajectory: [
     {
       club: "Newell's Old Boys",
-      period: "2012 — 2021",
-      role: "Fútbol Infantil y Juvenil AFA",
+      period: "2012 — 2020",
+      role: "Fútbol Infantil y Juvenil",
       location: "Rosario, Argentina",
-      description: "9 temporadas de formación técnica y táctica en una de las canteras formativas más históricas de Sudamérica. Fundamentos sólidos de salida desde el fondo.",
-      badgeText: "Cantera Formativa"
-    },
-    {
-      club: "Club Atlético Belgrano",
-      period: "2021 — 2023",
-      role: "Divisiones Juveniles AFA",
-      location: "Córdoba, Argentina",
-      description: "Competencia de alto rigor en los torneos nacionales de AFA Juvenil. Desarrollo físico, madurez en zaga central y experiencia en exigencia competitiva.",
-      badgeText: "Juveniles AFA"
+      description: "8 temporadas de formación base en una de las canteras más reconocidas del mundo. Fundamentos de control, salida bajo presión y visión de juego.",
+      badgeText: "Cantera Formativa",
+      yearsCount: "8 años"
     },
     {
       club: "A.D.I.U.R.",
-      period: "2023 — Actualidad",
-      role: "Plantel Superior / Primera División Local",
+      period: "2020 — 2024",
+      role: "Divisiones Formativas / Primera Etapa",
       location: "Rosario, Argentina",
-      description: "Titularidad del 96.3% en la zaga central. Referente defensivo en transiciones rápidas, salida estructurada y liderazgo en pelota parada.",
-      badgeText: "Actualidad"
+      description: "4 años de desarrollo físico y táctico en la zaga central. Consolidación de perfil zurdo y adaptabilidad a ambos lados de la defensa.",
+      badgeText: "Desarrollo",
+      yearsCount: "4 años"
+    },
+    {
+      club: "Belgrano de Córdoba",
+      period: "2024 — 2025",
+      role: "Divisiones Juveniles AFA",
+      location: "Córdoba, Argentina",
+      description: "1 temporada de alto rigor competitivo en torneos nacionales de AFA. Fricción, ritmo de juego intensivo y experiencia interprovincial.",
+      badgeText: "AFA Juvenil (1 Temp.)",
+      yearsCount: "1 temporada"
+    },
+    {
+      club: "A.D.I.U.R.",
+      period: "2025 — Actualidad",
+      role: "Plantel Superior / Zaga Central",
+      location: "Rosario, Argentina",
+      description: "Retorno a la institución con protagonismo absoluto: 96.3% de titularidad, dorsal #6, 1040 minutos de juego y liderazgo en la zaga.",
+      badgeText: "Titular Actual",
+      yearsCount: "Actualidad"
     }
   ] as ClubTrajectory[],
 
@@ -200,7 +206,7 @@ export const PLAYER_DATA = {
       seconds: 89,
       category: "cobertura",
       title: "Cobertura de Espalda al Lateral",
-      description: "Cubre la banda ante el desborde rival, aguanta con solidez corporal y despeja seguro al lateral sin conceder córner.",
+      description: "Cubre la banda ante el desborde rival en cancha difícil, aguanta con solidez corporal y despeja seguro al lateral.",
       tag: "Cobertura Defensiva"
     },
     {
@@ -236,7 +242,7 @@ export const PLAYER_DATA = {
       seconds: 140,
       category: "cobertura",
       title: "Temporización y Despeje al Piso",
-      description: "Sostiene el mano a mano contra el atacante sin regalar espacio y barre al suelo extirpando el balón de manera reglamentaria.",
+      description: "Sostiene el mano a mano contra el atacante sin regalar espacio y barre al suelo extirpando el balón limpiamente.",
       tag: "Duelo 1v1"
     },
     {
@@ -272,7 +278,7 @@ export const PLAYER_DATA = {
       seconds: 188,
       category: "cobertura",
       title: "Cierre en Velocidad y Uso del Cuerpo",
-      description: "Cierre providencial en velocidad mano a mano; impone sus 86 kg ganando la cuerda y sale jugando con serenidad.",
+      description: "Cierre providencial en velocidad mano a mano; impone sus 88 kg ganando la cuerda y sale jugando con serenidad.",
       tag: "Potencia Física"
     },
     {
